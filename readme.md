@@ -1228,7 +1228,7 @@ fn main() {
 
 ```
 
-![image-20211216001514254](C:\Users\msi\AppData\Roaming\Typora\typora-user-images\image-20211216001514254.png)
+![image-20211216001514254](.\images\move.jpg)
 
 
 
@@ -1248,7 +1248,7 @@ fn main() {
 
 这种方法其实是对**堆的深拷贝**，具体的示意图可以参考
 
-![image-20211216004515832](C:\Users\msi\AppData\Roaming\Typora\typora-user-images\image-20211216004515832.png)
+![image-20211216004515832](.\images\clone.jpg)
 
 #### 6.1.9 栈数据赋值—拷贝
 
@@ -1276,6 +1276,8 @@ fn main() {
 
     takes_ownership(s);
     // 这里编译会报错
+    // 因为这里其实s已经被函数借用了、
+    // 这个时候的s已经名存实亡了 哈哈哈哈
 	println!("x -> {}", s);
     
     let x = 5;                      
@@ -1294,9 +1296,7 @@ fn makes_copy(some_integer: i32) { // some_integer comes into scope
 } // Her
 ```
 
-
-
-#### 作用域和返回值
+#### 6.1.11 作用域和返回值
 
 如果是组合类型存在`move`的但是我们，通过参数传入之后，原参数已失效，但是后续还要继续使用怎么办，这个时候可以返回一个元组，然后解构继续用（感觉这个操作好多余，不知道后面有没有其他的好办法）
 
@@ -1318,9 +1318,402 @@ fn calculate_length(s: String) -> (String, usize) {
 }
 ```
 
+### 6.2 引用和借用
+
+在`6.1.10`中我们看到`s`变量失效的这种场景，叫做借用，即这个变量从`s`被赋予给了`s1`
+
+引用类型**允许我们在没有所有者**的情况下拿到部分值（这句话其实我没从代码里面找到实际的例子，如果有大佬的话，可以给我指点一下）
+
+如果我们想要`s1`和`s`同时有用呢？
+
++ 第一种使用之前**返回变量** + **元组解构**的办法来继续拿到另一个值（*借用需要将值通过函数返回值的方式还给变量*）
++ 使用**引用**，引用的使用方法是使用关键字`&`
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let len = calculate_length(&s1);
+
+    println!("The length of '{}' is {}", s1, len);
+}
+
+fn calculate_length (s: &String) -> usize {
+    s.len()
+}
+```
+
+#### 6.2.1 引用的原理
+
+将引用值得指针指向对应的引用变量，然后引用变量其实是指向对应堆中的值的，具体的示意图如下：
+
+![](.\images\heap-reference.jpg)
+
+#### 6.2.2 变量的引用
+
+不仅函数可以通过引用的方式，普通变量原来`move`的操作也可以改成引用，这个时候注意以下几点：
+
+1. 在move的变量前，增加`&`符号即可
+2. 这个时候`s2`其实就是类似`s1`的`copy`的结果，但是在内部代表的是同一个结果
+3. 变量的借用不需要“还”
+
+```rust
+fn main() {
+    let mut s1 = String::from("hello");
+    s1.push_str(", world");
+    
+    let s2 = &s1;
+    println!("the str is {}", s2);
+}
+```
 
 
 
+#### 6.2.3 可变的引用
+
+目前我们学习了引用，但是如果我们想为引用变量，进行操作，即可变的引用类型我们要怎么做的，来看个**错误**的例子：
+
+```rust
+fn main() {
+    let mut s1 = String::from("hello");
+    add_str(&s1);
+    println!("the str -> {}", s1);
+}
+
+fn add_str(s: &String) {
+    // 这里编译会报错
+    // 因为默认这里的s是个不可变的变量，默认都是不可变的
+    s.push_str("rust");
+}
+```
 
 
 
+可变的引用只需要在`&`后，增加`mut`关键字即可，请看**正确的**示范:
+
++ 在调用函数的地方增加`&mut`
++ 在函数定义时增加`&mut`
++ 同时只能被引用一次
+
+```rust
+fn main() {
+    let mut s1 = String::from("hello");
+    
+    add_str(&mut s1);
+
+    println!("s1 -> {}", s1);
+
+}
+
+fn add_str(s: &mut String) {
+    s.push_str(", rust");
+}
+```
+
+
+
+#### 6.2.4 只能有一次引用
+
+这个地方其实是和变量的引用在文中是一章，但是比较容易出错，所以单独写一下，在使用引用的时候有一个重要的规则**对一个数据在同一时间（作用域）只能有一个可变的引用**，不然不符合这个规则，那么对不起，编译过不了。（目前我的理解是`mut`的变量只能引用一次，借出去就没了）
+
+这种策略是为了让可变性非常可控，为了避免一下几个行为：
+
++ 超过两个指针在同时接入一个相同的数据（处理并发问题）
++ 超过一个指针执行写操作
++ 没有同步接入数据的机制
+
+```rust
+fn main() {
+    let mut s1 = String::from("hello");
+    s1.push_str(", world");
+    let mut s4 = &mut s1;
+    s4.push_str(", rust");
+
+    // 这里的s1会报错，报错的理由就是s1是不可变的变量，mut已经被出借了
+    // println!("The length of '{}' is {}", s1, len);
+    // 这里能看到hello world rust
+    println!("the str -> {}", s4);
+}
+
+```
+
+**如何处理这种需要多个mut的场景呢？**
+
+根据所有者的规则，只要在不同的几个作用域即可，所以我们可以这样安排代码
+
+```rust
+fn main() {
+    let mut s1 = String::from("hello");
+    
+    // 如果写在这里，mut s4的地方就会报错
+    // 因为&mut s1这里已经被出借了
+    // let mut s2 = &mut s1;
+    {
+        // 写在独立的作用域里面就不会报错
+        let s2 = &mut s1;
+        println!("s2 -> {}", s2);
+    }
+	
+    let mut s4 = &mut s1;
+    // println!("the str is {}, {}", s2, s4);
+
+    println!("the str -> {}", s4);
+}
+```
+
+
+
+另外，如果是非`mut`的多个引用，在rust中是可以被接受的，但是要注意是在哪里用的，**如果最后一次调用完，对应的引用被回收了，那么再去赋值其实是不会报错的**，这个很重要我们结合例子看下：
+
+我理解的规则：
+
+1. ~~如果`mut`引用创建时，还有引用没被收回不允许出借~~
+2. ~~有了`mut`引用不允许其他出借~~
+3. 使用局部作用域，利用`所有者规则`可以额外出借
+
+```rust
+fn main() {
+    let mut s1 = String::from("hello");
+    
+    let s2 = &s1;
+    let s3 = &s1;
+    // 如果print在这里是不会报错的
+    // 因为这里print是s2和s3最后被使用的
+    // 所以使用完s2, s3会被回收，后面
+    // 再出借mut的s1是可以的
+    println!("the str is {}, {}", s2, s3);
+
+    let mut s4 = &mut s1;
+    // 如果print在这里是不允许出借的
+    // 因为s2和s3还是出借状态，s1被s2和s3指向，这个时候不允许出借
+    // println!("the str is {}, {}", s2, s3);
+    println!("the str -> {}", s4);
+}
+```
+
+
+
+#### 6.2.5 悬摆的引用
+
+函数没有必要返回一个无效的引用值，这个地方其实我理解官方的意思就是，因为函数执行完毕，我们的作用域内的变量会销毁，但是这个时候，我们如果使用引用的话，我们必须保证**引用是有效的**，如果这个原引用销毁了，那就不是有效的，所以编译时候会报错：
+
+```rust
+fn dangle() -> &String {
+    let s = String::from("hello");
+
+    // 这里会报错
+   	&s
+}
+
+// 正确写法
+fn dangle() -> String {
+    let s = String::from("hello");
+
+    s
+}
+```
+
+
+
+**官方的引用规则**
+
++ 任何时候只能有一个`mut`的引用和若干个`immutable`的引用
++ 引用必须总是有效的
+
+
+
+### 6.3 切片类型
+
+切片类型是另一种不需要所有者的数据类型，其目的是为了让我们能够在连续内存的一段连续的数据中，读取一部分数据所用的。
+
+我们先在来看一个例子，如果需要获取一句话中第一个单词结尾的位置，我们需要怎么操作呢，很简单，可以通过**遍历**的方法，我们来看下遍历的代码：
+
+【代码思路梳理】：
+
+1. 遍历所有字符串
+2. 字符串为" "的时候输出对应的索引值
+
+【关键代码梳理】：
+
+1. `first_word`这个函数不需要所有者，所以直接使用`引用类型`就好
+
+2. `as_bytes`其用法的意思就是，将一个字符串，变为字符的切片，即这里会循环一个数组
+
+   > Returns a byte slice of this `String`'s contents.
+
+3. 遍历数组的方法，利用迭代器来实现，迭代器的使用方法是`.iter().enumerate()`即可实现迭代器，一个一个输出对应的值，类似`next`
+
+```rust
+fn main() {
+    let mut s = String::from("hello world");
+
+    let word = first_word(&s); // word will get the value 5
+    println!("word -> {}", word);
+
+    // 使用完成之后，将对应的字符串置为空
+    s.clear(); 
+}
+
+fn first_word(s: &String) -> usize {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
+
+    s.len()
+}
+```
+
+**思考**：通过上述方法来看，如果我们这个时候需要获取第二第三个单词的索引，那其实这个方法会越来越冗长和复杂，其实想想在JS中如果我们要找到第二第三个单词怎么办，通过`"  "`来对字符串进行切割即可~，所以其实RUST也有这种切片类型的概念
+
+#### 6.3.1 字符串切片
+
+回忆下之前，做猜数字游戏的时候的Range的使用方法`[1..3]`代表从1~3的区间，其实这就是切片，我们来看看代码，通过`..`这种方式，来获取区域中的`[0, 5)`这个区间内的所有字符，具体可以翻译成JS中的`a.slice(0, 5)`
+
+```rust
+fn main() {
+    let mut s = String::from("hello world");
+    let hello = &s[0..5];
+    let world = &s[6..11];
+    
+    println!("hello -> {}, world -> {}", hello, world); 
+}
+
+```
+
+![](.\images\slice.jpg)
+
+**注意点**
+
+1. 使用切片类型，目前简写从第一个元素开始，和切片到末尾可以通过简写的方法
+
+   ```rust
+   fn main() {
+       let mut s = String::from("hello world");
+   
+       let hello = &s[..5];
+       let world = &s[6..];
+   
+       println!("hello -> {}, world -> {}", hello, world);
+   }
+   ```
+
+2. 字符串类型切片之后的类型变为了`&str`这个地方我们需要注意下，所以我们修改之前的`first_word`函数如下
+
+   ```rust
+   // 这里函数的返回值需要是&str
+   fn first_word(s: &String) -> &str {
+       let bytes = s.as_bytes();
+   
+       for (i, &item) in bytes.iter().enumerate() {
+           if item == b' ' {
+               return &s[0..i];
+           }
+       }
+   
+       &s
+   }
+   ```
+
+3. 引用类型在被使用之前其所有者必须存在
+
+   ```rust
+   fn main() {
+       let mut s = String::from("hello world");
+   
+       // 这个first_word是2中的方法
+       let word = first_word(&s); // word will get the value 5
+       // 如果clear在这里，那么因为后面word使用的是s的引用
+       // 所以在这里清空后s就没有值了
+       // 因此编译阶段就会报错
+       // s.clear();
+       println!("word -> {}", word);
+       s.clear(); 
+   }
+   ```
+
+
+
+【思考】
+
+`注意点3`中，我观察到报错是：mut类型不能出借给immutable类型，所以我就在想，难道我改了一波类型，这个地方这种奇怪的问题就能被绕过了吗~所以我进行了类型的魔改
+
+```rust
+fn main() {
+    let mut s = String::from("hello world");
+
+    let word = first_word(&mut s); // word will get the value 5
+    //
+    s.clear(); 
+    println!("word -> {}", word);
+
+}
+
+fn first_word(s: &mut String) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    s
+}
+```
+
+但是其实我们发现这里还是报错的，`cannot borrow `s` as mutable more than once at a time`因为其实这个地方看到clear定义的时候，是`&self`是一个`mut`类型，所以这个地方我们其实明白了，一个变量最多创造一个`mut`类型的引用，其实还是被规则拦住了!!
+
+![image-20211218141749542](.\images\clear.png)
+
+
+
+#### 6.3.2 String字面量切片
+
+刚才`6.3.1`中的切片指的是通过`String`类来进行构造的，如果我们是通过`String`字面量来进行构造的呢？会发生什么事呢？我们接下去来看~
+
+字符串字面量，现在其实类型是`&str`的引用，所以其实,对字面量定义的切片，是对其**引用的切片**，当然字面量的切片也可以作为函数的参数，可以看`get_word`这个方法，但是如果作为切片接受参数，参数的类型为`&str`
+
+```rust
+fn main() {
+    let mut s2 = "Hello World";
+    s2 = "Rust Hello World";
+
+    let s3 = &s2[..5];
+    let s4 = get_word(&s2[..11]);
+
+    println!("s3 -> {}, s4 -> {}", s3, s4); // s3 -> Rust , s4 -> Rust
+}
+
+fn get_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+    s
+}
+```
+
+
+
+#### 6.3.3 其他切片
+
+其他切片例如数组的切片其实也一样，我们只需要对其进行引用切片即可~
+
+```rust
+fn main () {
+    let a = [1, 2, 3, 4, 5];
+	let slice = &a[1..3];
+}
+```
+
+
+
+### 6.4 总结
+
+本章学习了所有者，借用切片的概念，确保了在rust编译过程中的安全性。同时也梳理了一下rust的内存管理控制和使用，以及与其他语言在内存管理上的区别。所有者的影响rust代码的运行，是贯穿遍及整个rust学习者使用过程中的，所以我们必须好好理解
