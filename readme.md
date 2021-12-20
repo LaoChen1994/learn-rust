@@ -1,3 +1,5 @@
+
+
 # Rust学习笔记
 
 ## 0. 写在前面
@@ -9,8 +11,8 @@
 
 ### 0.2 本章大纲
 
-1. rust环境的安装
-2. 第一个hello rust程序
+1. Rust环境的安装
+2. 第一个hello Rust程序
 3. cargo的简单使用（包的创建，打包，运行，检测更新）
 4. toml文件一些配置项的使用
 
@@ -21,7 +23,7 @@
 + 步骤： 
 
   + C++环境安装：根据文档中，windows可以先进入[visual-cpp-build-tools](https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/)下载对应的工具，安装完成后，重启电脑即可
-  + Rust安装：[rust下载](https://forge.rust-lang.org/infra/other-installation-methods.html)选择对应的版本下载即可
+  + Rust安装：[Rust下载](https://forge.rust-lang.org/infra/other-installation-methods.html)选择对应的版本下载即可
   + 测试：使用`rustc --version`能看到对应的版本号就是安装成功啦
 
 ### 1.2 MacOS安装过程
@@ -48,7 +50,7 @@ fn main() {
 + 关键分析
   + 第一行的fn用于声明一个函数
   + main函数在rust函数中是作为第一行代码执行的
-  + println后面的`!`，这是macro的宏，如果加了`!`代表你调用的是rust的宏而不是普通函数
+  + println后面的`!`，这是macro的宏，如果加了`!`代表你调用的是Rust的宏而不是普通函数
   + `;`代表该行语句结束
 
 ### 2.2 编译rust
@@ -1072,26 +1074,26 @@ fn fibonacci(number: u32) -> u32 {
 
 ### 6.1 什么是所有者
 
-#### 6.1.1 RUST所有者得模式
+#### 6.1.1 Rust所有者得模式
 
-所有者是Rust核心的特性，让我们来看看在内存GC的管理上，RUST有何不同。
+所有者是Rust核心的特性，让我们来看看在内存GC的管理上，Rust有何不同。
 
 **现有的GC模式**
 
 1. 不断查询那些不再被使用的内存
 2. 让coder自己分配和释放内存
 
-**RUST的模式**： 系统所有者指定规则，编译器再编译时检测规则，如果不指定所有者，运行时速度会变慢。
+**Rust的模式**： 系统所有者指定规则，编译器再编译时检测规则，如果不指定所有者，运行时速度会变慢。
 
 > 问题来了，作为一个新手我不知道应该怎么指定我所有者的规则该怎么办？
 >
-> 官方回答：你就得多学多练，越是有经验得RUST使用者，对所有者理解越深，你自然而然代码就会越安全和越有效，嘿嘿。听君一席话，的确听了一席话。
+> 官方回答：你就得多学多练，越是有经验得Rust使用者，对所有者理解越深，你自然而然代码就会越安全和越有效，嘿嘿。听君一席话，的确听了一席话。
 
 
 
 #### 6.1.2 堆栈的介绍
 
-这里因为RUST中在使用所有者的时候，部分可能需要通过堆和栈之间的关系才能做出合适的决定，因此简单介绍下。
+这里因为Rust中在使用所有者的时候，部分可能需要通过堆和栈之间的关系才能做出合适的决定，因此简单介绍下。
 
 **堆**和**栈**其实都是程序在运行过程中在内存中用于存储数据的地方。具体的区别可以看[栈和堆的区别](https://blog.csdn.net/u012836896/article/details/89973820)
 
@@ -1145,7 +1147,7 @@ fn main() {
 
 #### 6.1.5 String type的例子
 
-当数据变量存在栈中的时候，每个作用域当结束的时候，栈会被清空，这样如果我们在多个作用域中想要用到同一个变量，我们可能就需要copy自己的代码多次，如果我们的**数据存在堆中，我们使用引用的时候，RUST会自己去判断，何时将不用的堆中的数据删除**~
+当数据变量存在栈中的时候，每个作用域当结束的时候，栈会被清空，这样如果我们在多个作用域中想要用到同一个变量，我们可能就需要copy自己的代码多次，如果我们的**数据存在堆中，我们使用引用的时候，Rust会自己去判断，何时将不用的堆中的数据删除**~
 
 这里通过一个**String类型**的数据来做分析，扩展一个字符串的长度：
 
@@ -1175,7 +1177,7 @@ fn main() {
 
 + 在运行时，内存需要通过内存分配机制来进行分配
 + 当我们使用`String`类型的时候内存分配器为我们分配内存（利用`from`方法来申请内存）
-+ RUST的GC策略，当变量不再所属于当前的作用域，该内存会被自动回收
++ Rust的GC策略，当变量不再所属于当前的作用域，该内存会被自动回收
 
 
 
@@ -1254,7 +1256,7 @@ fn main() {
 
 从6.1.7中的第一个例子我们可以看到其实整型`x` -> `y`值也赋值了，但是也没有产生`move`这是为什么呢？
 
-理由主要是：RUST的`Copy`特性，如果一个类实现了`Copy`特性，老的变量在被赋值给人的变量时会变得不稳定。具体包括哪些呢？
+理由主要是：Rust的`Copy`特性，如果一个类实现了`Copy`特性，老的变量在被赋值给人的变量时会变得不稳定。具体包括哪些呢？
 
 + 所有的整型类型
 + 布尔类型
@@ -1566,7 +1568,7 @@ fn first_word(s: &String) -> usize {
 }
 ```
 
-**思考**：通过上述方法来看，如果我们这个时候需要获取第二第三个单词的索引，那其实这个方法会越来越冗长和复杂，其实想想在JS中如果我们要找到第二第三个单词怎么办，通过`"  "`来对字符串进行切割即可~，所以其实RUST也有这种切片类型的概念
+**思考**：通过上述方法来看，如果我们这个时候需要获取第二第三个单词的索引，那其实这个方法会越来越冗长和复杂，其实想想在JS中如果我们要找到第二第三个单词怎么办，通过`"  "`来对字符串进行切割即可~，所以其实Rust也有这种切片类型的概念
 
 #### 6.3.1 字符串切片
 
@@ -1717,3 +1719,538 @@ fn main () {
 ### 6.4 总结
 
 本章学习了所有者，借用切片的概念，确保了在rust编译过程中的安全性。同时也梳理了一下rust的内存管理控制和使用，以及与其他语言在内存管理上的区别。所有者的影响rust代码的运行，是贯穿遍及整个rust学习者使用过程中的，所以我们必须好好理解
+
+
+
+
+
+## 7. 使用Structs来结构化相关数据
+
+### 写在前面
+
+结构体数据类似面向对象中的对象，将多个有意义的字段且相关的数据聚合在一起。本章将对比元组和结构体，我们将示范，如何定义和使用结构体，将定义一系列有关联的函数（特别是其中一些相关联的函数，称为方法），来说明其与一个结构体类型之间的关系。另外，结构体和枚举值可用于创建在我们代码中一个新的类型，这样便于在Rust编译过程中进行类型检验。
+
+### 7.1 定义和使用结构体的例子
+
+#### 7.1.1 定义和简单使用
+
+**对比元组**：相比较元组，元组的每一项的类型确实可以不同，但是你**并不能很直观的明白每一项类型对应数据背后的意义**，而结构可以让你给**每一个数据命名**，这样你就可以很明白每一个数据它实际表示的意义。
+
+**定义方式**：使用`struct`关键字，之后跟上对应的类型的名称，之后通过`{}`来规定结构体中拥有参数的类型，其实和`typescript`中的`interface`定义有点像，只不过是把`interface` 改成了`struct`
+
+**使用姿势**：创建对应结构体的实例，其方法是需要指出具体每个参数的值。创建实例的过程：（1）声明结构体的名称（2）在大括号中通过`key: value`键值对的方式来定义已经存在与`struct`声明中的`key`并填充符合其类型的值（3）我们创建结构体后我们只关心这个名称的值想存在这个结构体中，而不关心其存储的顺序
+
+**参数使用**：如果我们需要从结构体中获取相关的值，我们可以使用`.`语法，改变解构体的参数主要需要有两步：（1）设置对应的结构体为`mut`类型（2）使用`.`语法来将对应的结构体重新赋值
+
+**注意点**：如果我们需要改变一个解构体中的某一项，那么他一定是整个结构体是可变的，Rust不允许我们只让其中几项是可变的，而整个结构体是不可变的，这个和JS有很大的不一样
+
+```rust
+// 结构体的定义
+struct User{
+    active: bool,
+    username: String,
+    age: u32,
+    email: String
+}
+
+fn main() {
+    // 但是比较奇怪的是
+    // 这里构造的User这个对象，但是里面的attr竟然编辑器里面
+    // 没有代码提示
+    // 结构体的使用
+    let mut user = User {
+        active: true,
+        username: String::from("Tom"),
+        email: String::from("tom@163.com"),
+        age: 18
+    };
+    
+    user.email = String::from("loveJerry@163.com");
+
+    // 获取解构体中具体的值
+    println!("user email -> {}", user.email) // user email -> loveJerry@163.com
+}
+
+```
+
+
+
+#### 7.1.2 利用函数便捷创建结构体实例
+
+当我们一个**结构体中有很多相同字段的值（指的是赋值）**，**使用字段初始化的构造函数的方式**，会更加方便。这个语法其实目前和JS中的对象参数的省略写法是相同的。
+
+Rust也支持我们使用类似一个构造函数的方式来创建一个结构体的实例。
+
+（1）这种场景适合我们需要批量创建一些实例，但是其中有很多值其实是**默认或者让可以复用**的场景，这种场景下是一种更加便捷的方式。
+
+（2）当参数名和需要传入解构体中的参数的名是相同的时候，可以`email: email`的步骤，直接在结构体中赋值通过`email`即可
+
+具体的代码如下：
+
+```rust
+struct User{
+    active: bool,
+    username: String,
+    age: u32,
+    email: String,
+    sign_in_count: u32
+}
+
+fn main() {
+    let jerry = build_user(String::from("jerry"), 18, String::from("jerry@163.com"));
+    println!("jerry name -> {}, jerry email -> {}", jerry.username, jerry.email);
+}
+
+fn build_user(name: String, age: u32, email: String) -> User {
+    User {
+        // 使用参数赋值的简写方式
+        username,
+        email,
+        age,
+        active: true,
+        sign_in_count: 1
+    }
+}
+```
+
+通过上述的方式，当我们创建一个`User`解构，我们只需要传入`name`，`age`和`email`字段即可
+
+
+
+#### 7.1.3 使用Struct Update语法来从别的结构体创建新的结构体
+
+这个语法其实和JS中的扩展运算符的语法是相同的，这里使用的语法是`..`(这里是两个点哈~JS里面是3个点)，但是他这里写在前面的`key`他的优先级会更高。
+
+**注意点**
+
+1. 除了没有使用到的字段，其他字段都是从`jerry`借用到`Dog`的，其等同于`=`
+2. 因为字段是借用的，所以在使用这种更新语法后，调用`jerry.email`（所有这些已经借用出去的字段），rust在编译的时候就会报错
+
+```rust
+struct User{
+    active: bool,
+    username: String,
+    age: u32,
+    email: String,
+    sign_in_count: u32
+}
+
+fn main() {
+    let jerry = build_user(String::from("jerry"), 18, String::from("jerry@163.com"));
+
+    let dog = User {
+        // 这里username写在前面，所以username用的是Dog
+        // 其他的都是借用jerry的
+        username: String::from("Dog"),
+        ..jerry
+    };
+    // 这里会报错，如果打开注释的话
+    // 因为这里除了username，其他字段都从jerry -> dog是个move的过程
+	// println!("jerry name -> {}, jerry email -> {}", jerry.username, jerry.email);
+
+    // dog name -> Dog, dog email -> jerry@163.com
+    println!("dog name -> {}, dog email -> {}", dog.username, dog.email);
+}
+
+fn build_user(username: String, age: u32, email: String) -> User {
+    User {
+        username,
+        email,
+        age,
+        active: true,
+        sign_in_count: 1
+    }
+}
+```
+
+
+
+#### 7.1.4 没有命名的元组解构来创建多种类型
+
+**定义**：通过元组定义的结构体类型，其称为元组结构。
+
+**作用**：元组结构由于没有对每个字段进行命名，其一般用来对**整个**元组类型一个命名，来区分不同的元组类型，通过整个**结构体维度**，而不是**字段维度**。
+
+**定义方法**：通过`struct`关键字、`结构体名称`(跟在struct关键词后)、元组定义三部分类定义。
+
+**使用姿势**：
+
+【实例化】使用`结构名` + `()`传参的方式实例化
+
+【获取值】通过`.`语法，和元组取数一样
+
+【解构方法】需要使用Struct来进行解构，直接看例子把，我感觉我用语言形容不出来
+
+```rust
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+fn main() {
+    let black = Color(0, 0, 0);
+    let white = Color(255, 255, 255);
+	
+    // 需要通过这种方式解构
+    let Color(black_r, black_g, black_b) = black;
+    
+    let origin = Point(0, 0, 0);
+    // 也可以使用.关键字来调用对应元组中的值
+	let x = origin.0;
+    
+    println!("r -> {}, g -> {}, b -> {}", black_r, black_g, black_b); // r -> 0, g -> 0, b -> 0
+}
+```
+
+
+
+#### 7.1.5 没有任何字段的单位结构体
+
+**定义**：其实讲的就是，**一个空的结构体**。（我们其实有时候只需要一个类型位的标志，但是其实你说他有值和没值有没有关系，也是也没有，我们知道知道这个类似枚举的类型是这么个东西就行, 我们也不需要去实现他。）
+
+**定义方法**：使用`struct`关键字
+
+```rust
+// 通过；来代表定义结束
+struct AlwaysEqual;
+
+fn main (){
+	let subject = AlwaysEqual;    
+}
+```
+
+
+
+**注意点**：
+
+Q1： 这里可能有一个问题，我们定义对象中的字段都是`String`类型，我们用`&str`为什么不行？
+
+A1： 我们想要结构体的所有者是结构体本身，所以不使用引用类型，因为这样所有用到结构体中的数据，其只要被使用，结构体就不会被GC
+
+Q2： 如果我们一定要存储的是一个引用类型呢？
+
+A2： 那么我们需要给对应的引用类型，声明生命周期，这部分我们现在还没学到。
+
+### 7.2 使用引用类型的一个例子
+
+**目标**：实现一个长方形面积计算的功能
+
+
+
+#### 7.2.1 使用函数分开传参
+
+我们第一种最直接容易想到的，就是将`width`和`height`作为两个参数传入，这种比较简单，不过多赘述了
+
+```rust
+fn main() {
+    let width = 30;
+    let height = 40;
+
+    let areaRlt = area(&width, &height);
+
+    println!("area -> {}", areaRlt)
+}
+
+fn area(x: &u32, y: &u32) -> u32 {
+    x * y
+}
+
+```
+
+
+
+#### 7.2.2 使用元组传参
+
+我们将`width`和`height`通过元组封装，然后通过元组解构得到不同的数据来计算面积。
+
+**缺点**：我们并不清楚，哪个参数是长，哪个参数十款，虽然我们将两个参数整合成了一个参数，但是其参数的意义并不清晰。
+
+```rust
+fn main() {
+    let width = 30;
+    let height = 40;
+
+    let areaRlt2 = areaTuples((&width, &height));
+    println!("area2 -> {}", areaRlt2);
+}
+
+
+fn areaTuples(dimesion: (&u32, &u32)) -> u32 {
+    let (width, height) = dimesion;
+    
+    width * height
+}
+```
+
+
+
+#### 7.2.3 重构参数通过结构体，增加参数的意义
+
+由于元组对数据没有特殊的定义，这里我们采用结构体的数据结构来标记数据，代替元组。
+
+我们将长和宽分别标记为`width`和`height`，分别定义为`u32`类型，通过将`width`和`height`作为`Dimension`的参数传入
+
+在area函数中接受两个参数，然后通过`.`语法得到对应的值，这里我们**故意使用**`&Dimension`来对应使用创建的Dimension的引用（虽然这里看起来没那么必要，但是如果我们这个参数被很多地方共享的话，如果没有这个`&`引用，后面的代码会被借用折磨），在函数中我们使用`.width`和`.height`来取值，相较于元组，肯定是更具有于一的
+
+```rust
+struct Dimension {
+    width: u32,
+    height: u32
+}
+
+fn main() {
+    let width = 30;
+    let height = 40;
+
+    let areaRlt3 = area(&Dimension{
+        width,
+        height,
+    });
+    println!("area3 -> {}", areaRlt3)
+}
+fn area(prop: &Dimension) -> u32 {
+    let width = prop.width;
+    let height = prop.height;
+
+    width * height
+}
+```
+
+
+
+#### 7.2.4 使用衍生特性增加函数的功能性
+
+这里向我们介绍了衍生特性，`derive`的用法。
+
+原文中举的例子是，如果我们想要通过`println!`这个宏打印结构体，目前是不行的。目前会报错
+
+```bash
+error[E0277]: `Dimension` doesn't implement `std::fmt::Display`
+=help: the trait `std::fmt::Display` is not implemented for `Dimension`
+= note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+= note: this error originates in the macro `$crate::format_args_nl` (in Nightly builds, run with
+-Z macro-backtrace for more info)
+```
+
+其意思就是，没有实现`Display`这个方法，对于系统自带的绝大多数类型来说都实现了这个方法，但是对于结构体来说，其实没有实现`Display方法因此展示不出来`。然后看后面的`help`,他其实给出了几个解决办法：使用`{:?}/{:#?}`来代替`Display`函数作为输出，这个时候函数会执行Debug特性
+
+但是当我们加上对应的`{:?}`之后，又出现报错:
+
+```bash
+help: the trait `Debug` is not implemented for `Dimension`
+note: add `#[derive(Debug)]` to `Dimension` or manually `impl Debug for Dimension`
+```
+
+告诉我们，我们目前没有实现`Debug`,Rust目前功能函数中我们增加`#[devrive(Debug)]`就可以引入`Debug`特性
+
+所以最终我们要做的事情就是：（1）增加`#[derive(Debug)]`（2）在打印的时候使用`{:?}/{:#?}`代替`{}`(其中`{:#?}`输出的特性会带有格式)
+
+```rust
+#[derive(Debug)]
+struct Dimension {
+    width: u32,
+    height: u32
+}
+
+fn main() {
+    let demension = Dimension{
+        width,
+        height,
+    };
+    println!("debug -> {:?}", demension)
+}
+
+```
+
+在这里，目前官网还告诉我们了一个`debug`的办法，使用宏`dbg!`,他也可以直接打出`Debug`对应的值，但是这个注意的是，`dbg!`是一个会返回所有者的方法，所以我们可以直接套在表达式内，不会应用我们想要的函数本身的所有者，所有的这类衍生功能都放在了附录中，如果有需要可以进入[附录C](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)
+
+
+
+### 7.3 方法语法
+
+方法和函数类似，他们都是通过`fn`关键词来进行定义的，他也能接受参数和返回值，也可以在任意位置调用。方法不同于函数的地方在于，他们需要定义在结构体的上下文中，另外第一个参数必须是`self`代表这个实例的引用。
+
+
+
+#### 7.3.1 定义方法
+
+**定义方法的步骤**：
+
+1. 使用`impl`关键字来将`struct`的参数定义和对应的实现关联（这里impl和struct后面对应的结构名应该要一样才能关联起来）。
+2. 通过`fn`关键字来定义方法
+3. 方法的第一个参数为`&self`来接受实例上下文（必须）
+4. 如果我们想要去改变`self`中的值，可以使用`&mut self`
+5. rust并不会自己去实现`setter`和`getter`方法需要我们手动去写，来实现变量的私有化
+
+```rust
+#[derive(Debug)]
+struct Dimension {
+    width: u32,
+    height: u32
+}
+
+impl Dimension {
+    fn width(&self) -> bool {
+        self.width > 0
+    }
+
+    fn height(&self) -> bool {
+        self.height > 0
+    }
+
+    fn area(&self) -> u32 {
+        let mut area: u32 = 0;
+
+        if self.width() && self.height() {
+            area = self.width * self.height;
+        }
+
+        area
+    }
+}
+
+fn main() {
+    let width = 30;
+    let height = 40;
+
+    let demension = Dimension{
+        width,
+        height,
+    };
+    println!("area -> {}", demension.area())
+}
+
+```
+
+
+
+#### 7.3.2 在何处使用`->`运算符
+
+在`C/C++`语言中，使用`.`来调用对象的方法，使用`->`来调用引用对象指针的方法，所以你需要区分到底使用的对象是真的对象，还是对象的引用。
+
+在Rust中我们没有类似`->`运算符的语法，我们使用`.`语法即可`object.someting()`和`&object.something()`就可以，在Rust中`&self`, `&mut self`和`self`调用方法的姿势都是一样的，这样看起来清楚不少，但是我们最好也能清晰的知道这几个东西的区别
+
+
+
+#### 7.3.3 更多参数的方法
+
+之前说过了，在结构体的方法中，其实除了`self`参数外还可以传多个其他参数，这里官网实现了一个`can_hold`方法来描述，是否一个矩阵可以包括另外一个矩阵，其实就是我们外部调用时传入的参数，对应到实际`impl`实现内部，其实就是参数索引+1的关系（因为第一个参数是`self`）
+
+```rust
+#[derive(Debug)]
+struct Dimension {
+    width: u32,
+    height: u32
+}
+
+impl Dimension {
+    fn width(&self) -> bool {
+        self.width > 0
+    }
+
+    fn height(&self) -> bool {
+        self.height > 0
+    }
+
+    fn area(&self) -> u32 {
+        let mut area: u32 = 0;
+
+        if self.width() && self.height() {
+            area = self.width * self.height;
+        }
+
+        area
+    }
+
+    fn can_hold(&self, dimension: &Dimension) -> bool {
+        &self.width > &dimension.width && &self.height > &dimension.height
+    }
+}
+
+fn main() {
+    let rect1 = Dimension {
+        width: 30,
+        height: 50
+    };
+
+    let rect2 = Dimension {
+        width: 20,
+        height: 15
+    };
+
+    let rect3 = Dimension {
+        width: 25,
+        height: 10
+    };
+
+    println!("Can rect 1 hold rect2 ? {}", rect1.can_hold(&rect2)); // Can rect 1 hold rect2 ? true
+    println!("Can rect 2 hold rect3 ? {}", rect2.can_hold(&rect3)); // Can rect 2 hold rect3 ? false
+}
+
+```
+
+
+
+#### 7.3.4 结构体中的函数
+
+这里其实原文应该翻译成相关函数，其实讲的就是我们之前的所有方法都是有`&self`作为第一个参数的，这种是作为结构体方法（即需要实例化后才能调用的），但是类似JS中对象的`静态方法`的这种，就是不需要**实例化即可调用的函数**如何定义呢？
+
++ 在`impl`中定义关联函数时，第一个参数不传`self`
++ 在调用时，使用`::`语法
++ 一般用来作为构造函数给出
+
+
+
+```rust
+#[derive(Debug)]
+struct Dimension {
+    width: u32,
+    height: u32
+}
+
+impl Dimension {
+    fn width(&self) -> bool {
+        self.width > 0
+    }
+
+    fn height(&self) -> bool {
+        self.height > 0
+    }
+
+    fn area(&self) -> u32 {
+        let mut area: u32 = 0;
+
+        if self.width() && self.height() {
+            area = self.width * self.height;
+        }
+
+        area
+    }
+
+    fn can_hold(&self, dimension: &Dimension) -> bool {
+        &self.width > &dimension.width && &self.height > &dimension.height
+    }
+
+    fn square(width: u32) -> Dimension {
+        Dimension {
+            width,
+            height: width
+        }
+    }
+}
+
+fn main() {
+    // 通过::语法创建除了一个正方形，之后实例调用area方法计算面积
+    println!("square area -> {}", Dimension::square(3).area())
+}
+
+```
+
+
+
+#### 7.3.5 多个impl实现
+
+如果对同一个结构体，我们定义了多个`impl`会怎么办，其实也不会怎么样，会将多个`impl`中的内容合并，但是**如果存在定义了同名的结构体方法**，会**报错提示你多个`impl`中对应的方法被重复定义了**
+
+
+
+
+
