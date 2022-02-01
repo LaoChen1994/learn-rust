@@ -1,13 +1,11 @@
-
-
 # Rust学习笔记
 
 ## 0. 写在前面
 
 ### 0.1 相关资料
 
-1.  [Rust Programing Language](https://doc.rust-lang.org/book/title-page.html)
-2.  [源码地址](https://github.com/LaoChen1994/learn-rust)https://doc.rust-lang.org/book/title-page.html)
+1. [Rust Programing Language](https://doc.rust-lang.org/book/title-page.html)
+2. [源码地址](https://github.com/LaoChen1994/learn-rust)https://doc.rust-lang.org/book/title-page.html)
 
 ### 0.2 本章大纲
 
@@ -21,7 +19,7 @@
 ### 1.1 windows安装
 
 + 步骤： 
-
+  
   + C++环境安装：根据文档中，windows可以先进入[visual-cpp-build-tools](https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/)下载对应的工具，安装完成后，重启电脑即可
   + Rust安装：[Rust下载](https://forge.rust-lang.org/infra/other-installation-methods.html)选择对应的版本下载即可
   + 测试：使用`rustc --version`能看到对应的版本号就是安装成功啦
@@ -29,13 +27,15 @@
 ### 1.2 MacOS安装过程
 
 + 步骤：
-    + 运行安装命令
+  
+  + 运行安装命令
+    
     ```bash
-        # 运行命令
-        curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+      # 运行命令
+      curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
     ```
-    + 查看提示，成功安装后，命令行会提示 **Rust is installed now. Great!**
-
+  
+  + 查看提示，成功安装后，命令行会提示 **Rust is installed now. Great!**
 
 ## 2. Hello Rust
 
@@ -63,32 +63,35 @@ rustc ./helloRust.ts
 
 其中这个`exe`文件就是在windows上直接可以执行的文件
 
-
 ### 2.3 和动态语言的区别
 
 动态语言：js，python，ruby等需要我们在运行的平台安装对应的解释器，通过解释器将代码转换为字节码，通过字节码解释器来读取并执行字节码
 
 编译型语言：将代码编译成二进制可执行文件，平台上可以不安装任何解释器
 
-
 ## 3. Hello Cargo
 
 ### 3.1 cargo是什么
 
-  1. cargo是一个构建系统和包管理工具
-  2. 用来管理rust工程和处理许多任务（构建代码、下载包）
-  3. cargo在安装rust的环境时，会自动安装，所以这里的话，直接调用
-     ```bash
-      # 可以直接看到对应的cargo版本
-      cargo --version
-     ```
-  > 类似nodejs中的npm，通过scrips来帮我们执行相应脚本，通过install来安装包
+1. cargo是一个构建系统和包管理工具
+
+2. 用来管理rust工程和处理许多任务（构建代码、下载包）
+
+3. cargo在安装rust的环境时，会自动安装，所以这里的话，直接调用
+   
+   ```bash
+    # 可以直接看到对应的cargo版本
+    cargo --version
+   ```
+   
+   > 类似nodejs中的npm，通过scrips来帮我们执行相应脚本，通过install来安装包
 
 ### 3.2 cargo工程的创建
 
 #### 3.2.1 创建
 
 使用`cargo new [projectName]`来创建一个新的工程
+
 ```bash
 cargo new hello_cargo
 ```
@@ -100,7 +103,7 @@ cargo new hello_cargo
 创建的目录包括：
 
 + cargo.toml：用于定义包和信息`[package]`和依赖`[dependencies]`，其他还有别的配置如下：
-
+  
   ![](.\images\03-hello-cargo-toml.png)
 
 + 源文件目前是放在src的目录下的
@@ -110,14 +113,12 @@ cargo new hello_cargo
 `[package]`下面的一些配置:
 
 + build：用于指定build来指定这个包用源码的方式编译
-
+  
   > 比如在rust中引用了比如C的库，这些东西编译就放在一个build.rs中，会通过源码的方式进行编译
 
 + include和exclude：用来指定那些包需要被打包或发布，可以通过`carge package --list`来查看
 
 + publish: 用来指定包是否发布到包仓库，==保护包的私有性==
-
-
 
 ### 3.3 使用cargo构建和跑rust工程
 
@@ -146,7 +147,7 @@ cargo run
 1. 源文件没有变化，直接执行cargo build出来的文件
 
 2. 如果源文件产生了变化，会先编译，然后再执行
-
+   
    ![](.\images\03-cargo-build.png)
 
 3. 这里可以通过`cargo check`来检验当前版本的编译后的代码，是否还有更新为编译的版本
@@ -172,8 +173,6 @@ cargo run
 **我的想法**对于一个rust的小白来说，其实我对基本的语法都不太清楚，看这一章确实只能看个热闹，但是作为一个小白这章的笔记还是先拿上来，很多都是自己根据js迁移过来的一些理解，可能并不正确，后期学完相应的知识后，应该也会做相应的调整。
 
 ### 4.1 需求分析
-
-
 
 + 这里其实想做的一件事是：
   + 随机产生一个数字
@@ -202,8 +201,6 @@ cargo run
 2. 根据上述网址中对应的内容复制过去就行
 3. cargo update一下
 
-
-
 #### 4.2.2 代码编写
 
 ```rust
@@ -221,33 +218,23 @@ fn main() {
 
 *A1*: 因为`Rng`这个==trait==定义了随机数方法的实现，所以在这个地方现有了实现的引用，然后这边调用gen_range才能调用
 
-
-
 *Q2*: `1..10`写法的意思？
 
 *A2*:这里有两种写法`1..10`和`1..=10`，前者是`[1, 10)`这个区间，后者是`[1, 10]`这个区间
-
-
 
 *Q3*:如何去看这些函数怎么调用？
 
 *A3*: 可以通过`cargo doc --open`方法来打开帮助文档根据文档使用对应的包
 
-
-
 *Q4*：如何调用该函数方法？
 
 *A4*: 使用`::`的语法
-
-
 
 > 这里，我们使用rand::tread_rng()生成了一个区间1~10间的数字
 
 ### 4.3 获取用户输入
 
 #### 4.3.1 代码编写
-
-
 
 ```rust
 use rand::Rng;
@@ -270,29 +257,21 @@ fn main() {
 
 *A1*: 在rust中所有变量默认是immutable的，所以你应该懂了
 
-​		有mut定义：代表参数是mutable的
+​        有mut定义：代表参数是mutable的
 
-​		无mut定义：代表参数是immutable的
-
-
+​        无mut定义：代表参数是immutable的
 
 *Q2*: 实例如何创建？
 
 *A2*:  通过类`::`方法的方式，表示调用了类的一个方法，这里调用的是一new的一个构造函数，new我理解是rust中一个通用的名称，用来创建某个类新的值
 
-
-
 *Q3*：这里的`&mut guess`是什么意思？
 
 *A4*: 在rust中，这里通过`&`来表明拿的数，是对应数在内存中的**引用**，`可以保证在代码中多个地方拿同一个值，不需要拷贝多份`，这是一种非常复杂的特性。
 
-
-
 *Q4*: `expect`是用来干什么的
 
 *A3*: 在rust中，很多方法返回的类型是Result，这个类型的意思是，如果成功就返回一个Ok的枚举值，如果失败就返回一个Error的枚举值，那么这里失败的时候，如果我们expect传入了一个字符串，失败的msg就会是我们传入的字符串，可用来定位错误信息
-
-
 
 *Q5*：Result中的几种形式
 
@@ -323,8 +302,6 @@ fn main {
 
 目前，因为我们从命令行中获取的guess类型是String，但是我们实际通过rand生成的数字是Number类型，这两个类型不匹配是无法比较的，所以必须进行类型的转换，**静态语言对于类型定义的严谨性**
 
-
-
 #### 4.4.2 代码编写
 
 ```rust
@@ -345,8 +322,6 @@ fn main {
 
 *A1*: 通过类似TS中的`:`告诉rust，这个数字变量的类型，这里的`u32`代表的是一个32位的变量，类似一个数字变量的声明。
 
-
-
 *Q2*: 为什么use rand::Rng不导入的时候，这个gen_range就报错？
 
 *A2*: 因为`Rng`这个==trait==定义了随机数方法的实现，所以在这个地方现有了实现的引用，然后这边调用gen_range才能调用
@@ -360,8 +335,6 @@ modules：模块，这里就是我们用到的库的概念，比如rand、std等
 traits：是一个**方法的集合**（这个是我自己的理解），因为在[Rust——理解trait （一）](https://zhuanlan.zhihu.com/p/237560100)这里给出的例子中，其实是在实现上会更加灵活，即可以在特定的条件下表现出特定的特性，更加灵活
 
 Functions：通过`somemod::method`的方法来引用，相应模块下的方法
-
-
 
 *Q3*: trim和parse的用法
 
@@ -383,8 +356,6 @@ match xxxx() {
     A3(a3) => XXX,
 }
 ```
-
-
 
 #### 4.5.2 代码编写
 
@@ -414,8 +385,6 @@ fn main () {
 *Q1*: Ordering是啥？
 
 *A1*:只是一个枚举值~但是也要引入才能用
-
-
 
 ### 4.6 完整代码
 
@@ -472,7 +441,7 @@ fn main() {
             // expect用于判断上一个操作是否成功
             // 这个expect是io::Result定义的
             // .expect("Fail to read line");
-        
+
         // 这里的parse的返回值也是一个Result
         // 也是可以通过expect来怕段是否满足了转换的预期
         // 转换不成功就报错
@@ -492,20 +461,15 @@ fn main() {
         }
     }
 }
-
 ```
 
 ### 4.7 效果
 
 ![](.\images\guess.gif)
 
-
-
 ## 5. 通用的编程概念
 
 ### 5.1 变量和可变性
-
-
 
 #### 5.1.1 概念
 
@@ -538,14 +502,11 @@ fn main() {
     a = 6;
     println!("the variable is {}", a);
 }
-
 ```
 
 > It’s important that we get compile-time errors when we attempt to change a value that we previously designated as immutable because this very situation can lead to bugs. If one part of our code operates on the assumption that a value will never change and another part of our code changes that value, it’s possible that the first part of the code won’t do what it was designed to do. The cause of this kind of bug can be difficult to track down after the fact, especially when the second piece of code changes the value only *sometimes*
->
+> 
 > 大体的意思就是，为了避免bug和代码中非预期的成分如果我们一个变量定义的时候假设他是不可变的，那么其实如果对其二次赋值，其实是非符合预期的，所以编译阶段会报错
-
-
 
 #### 5.1.2 变量和常量的区别
 
@@ -560,7 +521,7 @@ fn main() {
 + 【区别】const的赋值，只能是一个常数的表达式，不能是只有在运行时才能被计算出的运行后的结果（就是不能是一个根据运行时环境参数不一样，动态计算得到的动态的结果）
 
 + 【非区别】建议定义常量时，通过`大写字母`和`_`的方式来定义，变量定义时建议使用小写，并且在单词间通过下划线的方式进行隔离的方式，**规范有效的命名方式让我们在写代码时对变量的识别会更加准确，利于代码的维护**。
-
+  
   ```rust
   // 全局的声明是被允许的
   // 区别二：需要通过 `: `来告诉rust这个常量对应的类型
@@ -576,10 +537,7 @@ fn main() {
       const B_BIT: u32 = 3;
       println!("the constant is {}, {}", C_C, B_BIT);
   }
-  
   ```
-
-
 
 #### 5.1.3 变量覆盖（阴影）
 
@@ -595,11 +553,11 @@ fn main() {
 fn main() {
     let x = 5;
     let x = x + 1;
-    
+
     // 之前是str类型，后面的number类型
     // 如果是定义的x_str 为mut
     // 后续通过赋值修改是不被允许的
-	let x_str = "   ";
+    let x_str = "   ";
     let x_str = x_str.len();
 
     {
@@ -612,8 +570,6 @@ fn main() {
     println!("The x Number is {}", x);
 }
 ```
-
-
 
 ### 5. 2 数据类型
 
@@ -632,7 +588,7 @@ fn main() {
 
 ##### 整型类型
 
-| 长度    | 有符号  | 无符号  |
+| 长度      | 有符号     | 无符号     |
 | ------- | ------- | ------- |
 | 8-bit   | `i8`    | `u8`    |
 | 16-bit  | `i16`   | `u16`   |
@@ -670,7 +626,7 @@ fn main () {
     // 浮点除法
     // 如果不是2.0 / 3.0返回的是0，默认为整型
     // let float_num = 2 / 3;  
-    
+
     let floorded:f64 = 2.0 / 3.0;
     // 这样是0.66666
     println!("the float is {}", floorded)
@@ -708,8 +664,6 @@ fn main() {
 }
 ```
 
-
-
 #### 5.2.2 组合类型
 
 ##### 元组类型
@@ -728,7 +682,7 @@ fn main () {
     // 元组
     let tup: (i32, i8, f64) = (500, 22, 3.14);
     let (t1, t2, t3) = tup;
-    
+
     println!("tup -> {}, {}, {}", tup.0, tup.1, tup.2);
     println!("tup -> {}, {}, {}", t1, t2, t3);
 }
@@ -738,8 +692,6 @@ fn main () {
 
 1. 可以通过`.`语法来进行对应位置元组数据的获取
 2. 可以通过解构的方式来回去对应位置上的值
-
-
 
 ---
 
@@ -757,7 +709,7 @@ fn main () {
     let array2: [i32;5] = [1, 2, 3, 4, 5]; 
     // 前两种比较好理解，这种的意思是生成一个整型的数组，长度为5，默认值为3
     let array3 = [3;5];
-    
+
     println!("str -> {}", array2[1]);
 }
 ```
@@ -797,8 +749,6 @@ fn get_params  (a: i32, b: i32) -> i32 {
 1. 函数的输入可定义类型，输入通过`:`来定义类型
 2. 默认的函数是不带返回值的，如果带上返回值需要通过`->`指定类型，不然会报错
 
-
-
 #### 5.3.2 函数体包括声明和表达式
 
 Rust是一个基于表达式的语言，表达式和声明的定义在这里就不叙述了，百度肯定比我专业。
@@ -833,7 +783,7 @@ fn main () {
 ```
 
 3. 可以将函数的返回值和表达式结合，这样函数会变得更加简洁
-
+   
    ```rust
    fn main () {
        println!("this is main function");
@@ -852,8 +802,6 @@ fn main () {
    }
    ```
 
-
-
 ### 5.4 注释
 
 注释主要通过`//`来进行注释，如果是多行的话，就是每一行之气都需要通过`//`来进行注释
@@ -862,7 +810,7 @@ fn main () {
 
 基本上所有的编程语言都逃不开相关的控制流的语法，例如`if`,循环`loop`等，这一小节我们一起来看看rust中的循环和判断语法
 
-####  5.5.1 if表达式
+#### 5.5.1 if表达式
 
 和其他语言中的if表达式一样，通过`if`关键字后面的声明，指定条件匹配后的操作，同样也支持`else`和`else if`
 
@@ -882,7 +830,7 @@ fn main() {
 **注意点**
 
 1. `if`作为表达式，可以在let中使用达到三元表达式的效果
-
+   
    ```rust
    fn main() {
        let number = 5;
@@ -894,13 +842,9 @@ fn main() {
 
 2. `1`中这种表达式要可以使用，有个前提就是每个表达式返回值的类型，需要相同，不然在编译时，rust编译器会报错
 
-
-
 #### 5.5.2 使用Loop来实现重复
 
 rust中提供了三种循环的方式，包括`loop`, `while`和`for`，接下来看看每一种的用法和写法
-
-
 
 ##### loop循环
 
@@ -925,14 +869,14 @@ fn main() {
 1. 和其他语言一样，rust中提供了`break`和`continue`关键字，用来停止循环和跳过后续代码这两个操作
 
 2. 如果需要退出指定的循环，可以将loop的的返回值拿到，并通过break来中中断
-
+   
    ```rust
    fn loopExit() {
        let mut  count = 0;
        'loop_rlt: loop {
            println!("count -> {}", count);
            let mut inner_count = 10;
-           
+   
            loop {
                println!("inner count ->{}", inner_count);
    
@@ -943,7 +887,7 @@ fn main() {
                if inner_count == 9 && count == 2 {
                    break 'loop_rlt;
                }
-               
+   
                inner_count -= 1;
            }
    
@@ -967,14 +911,14 @@ fn main() {
 3. loop返回的值需要通过`'` 加上变量名加上`:`来标注这是一个循环标记，这是一个规范，例如上述的`'loop_rlt`，这样通过`continue`和`break`来退出和继续循环
 
 4. 通过`let`和`break`可以获取break最后我们想要输出的函数值
-
+   
    ```rust
    fn loop_return_value(num: u32) -> u32 {
        let mut count = 1;
    
        let loop_value = loop {
            count+=1;
-           
+   
            if count == num {
                break count * 2;
            }
@@ -1046,8 +990,6 @@ fn for_loop () {
 
 > 上述方式因为是1..100所以区间是[1, 100)，如果想要双闭的区间，写法应该是(1..=100)
 
-
-
 #### 5.5.3 练习题
 
 **Fibonacci**
@@ -1068,8 +1010,6 @@ fn fibonacci(number: u32) -> u32 {
 
 ### 写在前面
 
-
-
 在rust中**所有者**是最独一无二的特性，他使得**rust能保证内存中的GC是安全的**。这里将介绍几个概念：**借用（borrowing）**、**切片（slices）**和rust在**内存中的数据展开**
 
 ### 6.1 什么是所有者
@@ -1086,10 +1026,8 @@ fn fibonacci(number: u32) -> u32 {
 **Rust的模式**： 系统所有者指定规则，编译器再编译时检测规则，如果不指定所有者，运行时速度会变慢。
 
 > 问题来了，作为一个新手我不知道应该怎么指定我所有者的规则该怎么办？
->
+> 
 > 官方回答：你就得多学多练，越是有经验得Rust使用者，对所有者理解越深，你自然而然代码就会越安全和越有效，嘿嘿。听君一席话，的确听了一席话。
-
-
 
 #### 6.1.2 堆栈的介绍
 
@@ -1098,6 +1036,7 @@ fn fibonacci(number: u32) -> u32 {
 **堆**和**栈**其实都是程序在运行过程中在内存中用于存储数据的地方。具体的区别可以看[栈和堆的区别](https://blog.csdn.net/u012836896/article/details/89973820)
 
 + 栈的特点
+  
   + 后入先出（例子：等电梯）
   + 长度固定，数据已直
   + 存储是有序的
@@ -1105,6 +1044,7 @@ fn fibonacci(number: u32) -> u32 {
   + push（存放）和access（查询）数据更快
 
 + 堆的特点
+  
   + 长度可变或长度未知
   + 存储是无序的，自由度比较大
   + 不连续的内存区域
@@ -1114,17 +1054,11 @@ fn fibonacci(number: u32) -> u32 {
 
 栈的读取更块是因为，不需要用指针去找到底是哪个碎片化的地址存储了相关的变量
 
-
-
-
-
 #### 6.1.3 所有者的规定
 
 1. 在rust中，每一个有值的变量都称为所有者（owner）
 2. 在同一个时间都只能有一个所有者
 3. 当所有者离开作用域，值也就被删除了
-
-
 
 #### 6.1.4 变量作用域
 
@@ -1143,8 +1077,6 @@ fn main() {
 }
 ```
 
-
-
 #### 6.1.5 String type的例子
 
 当数据变量存在栈中的时候，每个作用域当结束的时候，栈会被清空，这样如果我们在多个作用域中想要用到同一个变量，我们可能就需要copy自己的代码多次，如果我们的**数据存在堆中，我们使用引用的时候，Rust会自己去判断，何时将不用的堆中的数据删除**~
@@ -1161,15 +1093,13 @@ fn main() {
     s.push_str(", world");
 
     println!("s -> {}", s);
-    
+
     // 没有增加字符串长度的办法
     let a = "hello";
 }
 ```
 
 通过`string字面量`的方式定义通常是放在栈里面，因为是连续的空间一开始的长度是固定的，所以不可变，但是通过`String`来构造，其实是放在堆里面，扩展性更强，背后对应的是两种内存管理的方式。
-
-
 
 #### 6.1.6 内存和分配方式
 
@@ -1178,8 +1108,6 @@ fn main() {
 + 在运行时，内存需要通过内存分配机制来进行分配
 + 当我们使用`String`类型的时候内存分配器为我们分配内存（利用`from`方法来申请内存）
 + Rust的GC策略，当变量不再所属于当前的作用域，该内存会被自动回收
-
-
 
 #### 6.1.7 数据变量交互方式—转移(move)
 
@@ -1224,15 +1152,12 @@ fn main() {
     let s2 = s;
     // 这里会报错，目前这里的s是已经被借用了
     // borrow of moved value: `s` value borrowed here after move
-	println!("s -> {}", s);
+    println!("s -> {}", s);
     println!("s2 -> {}", s2);
 }
-
 ```
 
 ![image-20211216001514254](.\images\move.jpg)
-
-
 
 #### 6.1.8 变量数据交互的方式—克隆（clone）
 
@@ -1266,8 +1191,6 @@ fn main() {
 
 这些类型在被赋值的时候都不会发生类似`s`赋值给`s2`，导致`s`失效这种问题
 
-
-
 #### 6.1.10 所有者和函数
 
 在函数传递实参的时候，其实是对参数的赋值，所以也会满足上述说的拷贝时候的问题吗，就是基本上所有基础类型都不会存在`move`但复杂类型会存在`move`的问题
@@ -1280,12 +1203,12 @@ fn main() {
     // 这里编译会报错
     // 因为这里其实s已经被函数借用了、
     // 这个时候的s已经名存实亡了 哈哈哈哈
-	println!("x -> {}", s);
-    
+    println!("x -> {}", s);
+
     let x = 5;                      
     makes_copy(x);
     // 如果这里打印x不会报错，因为所有整型都不会move
-    
+
 }
 
 fn takes_ownership(some_string: String) { // some_string comes into scope
@@ -1306,7 +1229,7 @@ fn makes_copy(some_integer: i32) { // some_integer comes into scope
 fn main() {
     let s1 = String::from("hello");
 
-	// 利用元组结构来继续使用这个s1
+    // 利用元组结构来继续使用这个s1
     let (s2, len) = calculate_length(s1);
 
     println!("The length of '{}' is {}.", s2, len);
@@ -1362,13 +1285,11 @@ fn calculate_length (s: &String) -> usize {
 fn main() {
     let mut s1 = String::from("hello");
     s1.push_str(", world");
-    
+
     let s2 = &s1;
     println!("the str is {}", s2);
 }
 ```
-
-
 
 #### 6.2.3 可变的引用
 
@@ -1388,8 +1309,6 @@ fn add_str(s: &String) {
 }
 ```
 
-
-
 可变的引用只需要在`&`后，增加`mut`关键字即可，请看**正确的**示范:
 
 + 在调用函数的地方增加`&mut`
@@ -1399,7 +1318,7 @@ fn add_str(s: &String) {
 ```rust
 fn main() {
     let mut s1 = String::from("hello");
-    
+
     add_str(&mut s1);
 
     println!("s1 -> {}", s1);
@@ -1410,8 +1329,6 @@ fn add_str(s: &mut String) {
     s.push_str(", rust");
 }
 ```
-
-
 
 #### 6.2.4 只能有一次引用
 
@@ -1435,7 +1352,6 @@ fn main() {
     // 这里能看到hello world rust
     println!("the str -> {}", s4);
 }
-
 ```
 
 **如何处理这种需要多个mut的场景呢？**
@@ -1445,7 +1361,7 @@ fn main() {
 ```rust
 fn main() {
     let mut s1 = String::from("hello");
-    
+
     // 如果写在这里，mut s4的地方就会报错
     // 因为&mut s1这里已经被出借了
     // let mut s2 = &mut s1;
@@ -1454,15 +1370,13 @@ fn main() {
         let s2 = &mut s1;
         println!("s2 -> {}", s2);
     }
-	
+
     let mut s4 = &mut s1;
     // println!("the str is {}, {}", s2, s4);
 
     println!("the str -> {}", s4);
 }
 ```
-
-
 
 另外，如果是非`mut`的多个引用，在rust中是可以被接受的，但是要注意是在哪里用的，**如果最后一次调用完，对应的引用被回收了，那么再去赋值其实是不会报错的**，这个很重要我们结合例子看下：
 
@@ -1475,7 +1389,7 @@ fn main() {
 ```rust
 fn main() {
     let mut s1 = String::from("hello");
-    
+
     let s2 = &s1;
     let s3 = &s1;
     // 如果print在这里是不会报错的
@@ -1492,8 +1406,6 @@ fn main() {
 }
 ```
 
-
-
 #### 6.2.5 悬摆的引用
 
 函数没有必要返回一个无效的引用值，这个地方其实我理解官方的意思就是，因为函数执行完毕，我们的作用域内的变量会销毁，但是这个时候，我们如果使用引用的话，我们必须保证**引用是有效的**，如果这个原引用销毁了，那就不是有效的，所以编译时候会报错：
@@ -1503,7 +1415,7 @@ fn dangle() -> &String {
     let s = String::from("hello");
 
     // 这里会报错
-   	&s
+       &s
 }
 
 // 正确写法
@@ -1514,14 +1426,10 @@ fn dangle() -> String {
 }
 ```
 
-
-
 **官方的引用规则**
 
 + 任何时候只能有一个`mut`的引用和若干个`immutable`的引用
 + 引用必须总是有效的
-
-
 
 ### 6.3 切片类型
 
@@ -1539,7 +1447,7 @@ fn dangle() -> String {
 1. `first_word`这个函数不需要所有者，所以直接使用`引用类型`就好
 
 2. `as_bytes`其用法的意思就是，将一个字符串，变为字符的切片，即这里会循环一个数组
-
+   
    > Returns a byte slice of this `String`'s contents.
 
 3. 遍历数组的方法，利用迭代器来实现，迭代器的使用方法是`.iter().enumerate()`即可实现迭代器，一个一个输出对应的值，类似`next`
@@ -1579,10 +1487,9 @@ fn main() {
     let mut s = String::from("hello world");
     let hello = &s[0..5];
     let world = &s[6..11];
-    
+
     println!("hello -> {}, world -> {}", hello, world); 
 }
-
 ```
 
 ![](.\images\slice.jpg)
@@ -1590,7 +1497,7 @@ fn main() {
 **注意点**
 
 1. 使用切片类型，目前简写从第一个元素开始，和切片到末尾可以通过简写的方法
-
+   
    ```rust
    fn main() {
        let mut s = String::from("hello world");
@@ -1603,7 +1510,7 @@ fn main() {
    ```
 
 2. 字符串类型切片之后的类型变为了`&str`这个地方我们需要注意下，所以我们修改之前的`first_word`函数如下
-
+   
    ```rust
    // 这里函数的返回值需要是&str
    fn first_word(s: &String) -> &str {
@@ -1620,7 +1527,7 @@ fn main() {
    ```
 
 3. 引用类型在被使用之前其所有者必须存在
-
+   
    ```rust
    fn main() {
        let mut s = String::from("hello world");
@@ -1635,8 +1542,6 @@ fn main() {
        s.clear(); 
    }
    ```
-
-
 
 【思考】
 
@@ -1670,8 +1575,6 @@ fn first_word(s: &mut String) -> &str {
 
 ![image-20211218141749542](.\images\clear.png)
 
-
-
 #### 6.3.2 String字面量切片
 
 刚才`6.3.1`中的切片指的是通过`String`类来进行构造的，如果我们是通过`String`字面量来进行构造的呢？会发生什么事呢？我们接下去来看~
@@ -1701,8 +1604,6 @@ fn get_word(s: &str) -> &str {
 }
 ```
 
-
-
 #### 6.3.3 其他切片
 
 其他切片例如数组的切片其实也一样，我们只需要对其进行引用切片即可~
@@ -1710,19 +1611,13 @@ fn get_word(s: &str) -> &str {
 ```rust
 fn main () {
     let a = [1, 2, 3, 4, 5];
-	let slice = &a[1..3];
+    let slice = &a[1..3];
 }
 ```
-
-
 
 ### 6.4 总结
 
 本章学习了所有者，借用切片的概念，确保了在rust编译过程中的安全性。同时也梳理了一下rust的内存管理控制和使用，以及与其他语言在内存管理上的区别。所有者的影响rust代码的运行，是贯穿遍及整个rust学习者使用过程中的，所以我们必须好好理解
-
-
-
-
 
 ## 7. 使用Structs来结构化相关数据
 
@@ -1764,16 +1659,13 @@ fn main() {
         email: String::from("tom@163.com"),
         age: 18
     };
-    
+
     user.email = String::from("loveJerry@163.com");
 
     // 获取解构体中具体的值
     println!("user email -> {}", user.email) // user email -> loveJerry@163.com
 }
-
 ```
-
-
 
 #### 7.1.2 利用函数便捷创建结构体实例
 
@@ -1815,8 +1707,6 @@ fn build_user(name: String, age: u32, email: String) -> User {
 
 通过上述的方式，当我们创建一个`User`解构，我们只需要传入`name`，`age`和`email`字段即可
 
-
-
 #### 7.1.3 使用Struct Update语法来从别的结构体创建新的结构体
 
 这个语法其实和JS中的扩展运算符的语法是相同的，这里使用的语法是`..`(这里是两个点哈~JS里面是3个点)，但是他这里写在前面的`key`他的优先级会更高。
@@ -1846,7 +1736,7 @@ fn main() {
     };
     // 这里会报错，如果打开注释的话
     // 因为这里除了username，其他字段都从jerry -> dog是个move的过程
-	// println!("jerry name -> {}, jerry email -> {}", jerry.username, jerry.email);
+    // println!("jerry name -> {}, jerry email -> {}", jerry.username, jerry.email);
 
     // dog name -> Dog, dog email -> jerry@163.com
     println!("dog name -> {}, dog email -> {}", dog.username, dog.email);
@@ -1862,8 +1752,6 @@ fn build_user(username: String, age: u32, email: String) -> User {
     }
 }
 ```
-
-
 
 #### 7.1.4 没有命名的元组解构来创建多种类型
 
@@ -1888,19 +1776,17 @@ struct Point(i32, i32, i32);
 fn main() {
     let black = Color(0, 0, 0);
     let white = Color(255, 255, 255);
-	
+
     // 需要通过这种方式解构
     let Color(black_r, black_g, black_b) = black;
-    
+
     let origin = Point(0, 0, 0);
     // 也可以使用.关键字来调用对应元组中的值
-	let x = origin.0;
-    
+    let x = origin.0;
+
     println!("r -> {}, g -> {}, b -> {}", black_r, black_g, black_b); // r -> 0, g -> 0, b -> 0
 }
 ```
-
-
 
 #### 7.1.5 没有任何字段的单位结构体
 
@@ -1913,11 +1799,9 @@ fn main() {
 struct AlwaysEqual;
 
 fn main (){
-	let subject = AlwaysEqual;    
+    let subject = AlwaysEqual;    
 }
 ```
-
-
 
 **注意点**：
 
@@ -1932,8 +1816,6 @@ A2： 那么我们需要给对应的引用类型，声明生命周期，这部�
 ### 7.2 使用引用类型的一个例子
 
 **目标**：实现一个长方形面积计算的功能
-
-
 
 #### 7.2.1 使用函数分开传参
 
@@ -1952,10 +1834,7 @@ fn main() {
 fn area(x: &u32, y: &u32) -> u32 {
     x * y
 }
-
 ```
-
-
 
 #### 7.2.2 使用元组传参
 
@@ -1975,12 +1854,10 @@ fn main() {
 
 fn areaTuples(dimesion: (&u32, &u32)) -> u32 {
     let (width, height) = dimesion;
-    
+
     width * height
 }
 ```
-
-
 
 #### 7.2.3 重构参数通过结构体，增加参数的意义
 
@@ -2013,8 +1890,6 @@ fn area(prop: &Dimension) -> u32 {
     width * height
 }
 ```
-
-
 
 #### 7.2.4 使用衍生特性增加函数的功能性
 
@@ -2057,18 +1932,13 @@ fn main() {
     };
     println!("debug -> {:?}", demension)
 }
-
 ```
 
 在这里，目前官网还告诉我们了一个`debug`的办法，使用宏`dbg!`,他也可以直接打出`Debug`对应的值，但是这个注意的是，`dbg!`是一个会返回所有者的方法，所以我们可以直接套在表达式内，不会应用我们想要的函数本身的所有者，所有的这类衍生功能都放在了附录中，如果有需要可以进入[附录C](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)
 
-
-
 ### 7.3 方法语法
 
 方法和函数类似，他们都是通过`fn`关键词来进行定义的，他也能接受参数和返回值，也可以在任意位置调用。方法不同于函数的地方在于，他们需要定义在结构体的上下文中，另外第一个参数必须是`self`代表这个实例的引用。
-
-
 
 #### 7.3.1 定义方法
 
@@ -2117,18 +1987,13 @@ fn main() {
     };
     println!("area -> {}", demension.area())
 }
-
 ```
-
-
 
 #### 7.3.2 在何处使用`->`运算符
 
 在`C/C++`语言中，使用`.`来调用对象的方法，使用`->`来调用引用对象指针的方法，所以你需要区分到底使用的对象是真的对象，还是对象的引用。
 
 在Rust中我们没有类似`->`运算符的语法，我们使用`.`语法即可`object.someting()`和`&object.something()`就可以，在Rust中`&self`, `&mut self`和`self`调用方法的姿势都是一样的，这样看起来清楚不少，但是我们最好也能清晰的知道这几个东西的区别
-
-
 
 #### 7.3.3 更多参数的方法
 
@@ -2184,10 +2049,7 @@ fn main() {
     println!("Can rect 1 hold rect2 ? {}", rect1.can_hold(&rect2)); // Can rect 1 hold rect2 ? true
     println!("Can rect 2 hold rect3 ? {}", rect2.can_hold(&rect3)); // Can rect 2 hold rect3 ? false
 }
-
 ```
-
-
 
 #### 7.3.4 结构体中的函数
 
@@ -2196,8 +2058,6 @@ fn main() {
 + 在`impl`中定义关联函数时，第一个参数不传`self`
 + 在调用时，使用`::`语法
 + 一般用来作为构造函数给出
-
-
 
 ```rust
 #[derive(Debug)]
@@ -2241,16 +2101,1539 @@ fn main() {
     // 通过::语法创建除了一个正方形，之后实例调用area方法计算面积
     println!("square area -> {}", Dimension::square(3).area())
 }
-
 ```
-
-
 
 #### 7.3.5 多个impl实现
 
 如果对同一个结构体，我们定义了多个`impl`会怎么办，其实也不会怎么样，会将多个`impl`中的内容合并，但是**如果存在定义了同名的结构体方法**，会**报错提示你多个`impl`中对应的方法被重复定义了**
 
+## 8  枚举和模式匹配
+
+### 写在前面
+
+在本章中我们将看到枚举类（enum），本章内容主要分成几个部分：
+
+1. 定义和使用枚举值，来解决代码中的"魔法数字"的问题
+2. 了解`Option`这种特殊的枚举
+3. 使用`match`表达式进行模式匹配
+4. 使用`if let`结构，作为另一种方便、简洁可用的方案处理代码中的枚举值
+
+### 8.1 定义枚举
+
+**干啥用的**：枚举就是我们将一个变量有所有可能的值都列举出来的一种方式，这种方式增加了代码的语义化，也能让代码中的魔法数字减少，何乐而不为呢。文中讲了一个IP的事情，就是我们可能遇到IP的类型有IPV4和IPV6，所以是可以穷尽的。
+
+**定义方法**：通过`enum`来定义
+
+```rust
+enum EngineCylinder {
+    V4,
+    V6,
+    V8,
+    V12,
+}
+```
+
+#### 8.1.1 枚举值的使用
+
+**使用方法**：使用`::`语法来调用对应的类型
+
+```rust
+fn main() {
+    // 这里我们就得到了两个枚举的实例
+    let v6Engine = EngineCylinder::V6;
+    let v8Engine = EngineCylinder::V8;
+}
+```
+
+**注意点**：
+
+1. 枚举是一个类似`type`的概念，他只是告诉你，可能这个数据当前是什么状态，或者是什么类型，并不代表其本身是什么数据。
+2. 在类型和函数参数的定义上，这里的`v6Engine`和`v8Engine`其实它对应的类型都是枚举`EngineCylinder`，`v6`和`v8`只是他对应的实例的值而已，所以其实**枚举类**就是一个单独的类型，其可以作为函数的参数定义，也可以作为`struct`中一个键值对应的类型。
+3. 和`struct`类似，如果要`println`打印对应的值的话，需要`derive[Debug]`
+
+**例子：**
+
+这里我们为`Engine`定义了三个字段：功率`power`,气缸数`cylinderNumber`，排量`cc`和发动机名称`name`（对应的值我乱写的）
+
+```rust
+#[derive(Debug)]
+enum EngineCylinder {
+    V4,
+    V6,
+    V8,
+    V12,
+}
+
+struct Engine {
+    cylinderNumber: EngineCylinder,
+    power: u32,
+    cc: u32,
+    name: String
+}
+
+fn main() {
+    let v6Engine = EngineCylinder::V6;
+    let v8Engine = EngineCylinder::V8;
+
+    checkEngine(v6Engine);
+    checkEngine(v8Engine);
+
+    let engine = Engine {
+        cylinderNumber: EngineCylinder::V6,
+        power: 261,
+        name: String::from("3.0T"),
+        cc: 2956
+    };
+
+}
+
+fn checkEngine(engine: EngineCylinder) {
+    println!("engine is -> {:?}", engine)
+}
+```
+
+在定义枚举的时候，如果枚举的值写的太短，可能会让枚举的语义化也不太清楚，如果写的太长，可能导致枚举本身用起来太麻烦，因此，可以通过**在枚举的时候传入参数的方式**，来让枚举值更加的清晰，直接让枚举值和对应的值相关联。
+
+我们来看下面这个例子，目前有三个汽车品牌，吉利、领克、蔚来，他们各自有不同的车型，这里的领克05和领克03，通过跟在枚举值后面的`String`就可以区分出，具体是哪个车型，非常好用，**将一个枚举进行了扩展。枚举值是和后面的字符串相对应的**。
+
+在这个枚举后面的类型也可以是自己定义的结构体，他的作用，就是让你将某个枚举和某个值关联起来，当然这个地方，所有定义的枚举值，其变种都可以是不一样的
+
+```rust
+#[derive(Debug)]
+enum CarBrand {
+    Geely(String),
+    LINCO(String),
+    NIO(String)
+}
+
+enum Message {
+    // 没有任何数据关联
+    Quit,
+    // 命名了一个结构体类型
+    Move { x: i32, y: i32 },
+    // 关联了一个String类型
+    Write(String),
+    // 关联了一个包含3个i32的元组结构
+    ChangeColor(i32, i32, i32),
+}
+
+fn main() {
+    let geelyIcon = CarBrand::Geely(String::from("Icon"));
+    let linco05 = CarBrand::LINCO(String::from("05"));
+    let linco01 = CarBrand::LINCO(String::from("01"));
+
+    println!("05 -> {:?}, 01 -> {:?}", linco05, linco01);
+}
+```
+
+另一种玩法：**定义的枚举类型可以关联各种不同类型的数据**，下面的`Message`和定义多个`struct`效果上是相同的，但是唯一的区别就是，对于这样定义的枚举来说，其对应的上层的类型都是`Message`,而如果你定义了多个结构体类型，那他们都是不同的结构体。和`struct`类似，利用`impl`方法也可以为枚举中特殊的类，定义对应的方法。
+
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+impl Message {
+    fn invoke (&self) {
+        println!("123")
+    }
+}
+
+fn main () {
+    let write_message = Message::Write(String::from("123"));
+    write_message.invoke(); // 123
+}
+```
+
+#### 8.1.2 Option枚举和他超越Null的优势
+
+Option类型被用于很多场景，因为一个值可能是一些类型（就是由外部决定），也可能啥也不是。Option类型目前就是为了处理一些通用场景设计的。这种数据解构的意义在于告诉编辑器你是否是合理处理了所有的场景，避免在其他编程语言中很通用场景下的一些bug
+
+目前Rust不像其它语言一样，目前是没有`Null`这个数据类型的，因为文中认为其实把`Null`赋值给非`Null`得元素，其本身就是一个错误，没有存在得意义，那么问题来如果我们需要给默认值，一个什么都没有得值，我们需要怎么去表示呢？
+
+```rust
+enum Option<T> {
+    None,
+    Some(T)
+}
+
+fn main () {
+    let some_number = Some(5);
+    let some_string = Some("a string");
+    let absent_number: Option<i32> = None;
+}
+```
+
+**注意点**
+
+1. 使用`Option`得目的是为了模拟，一个值可能会有也可能会没有得这个场景
+2. 使用`Some`和`None`可以不使用`Option::`，在rust中会自动映射到`std::options::Option`上
+3. `Some`具有类型推断得作用，会根据`Some`中传入得元素，自动推断对应得类型
+4. `<T>`语法是一个泛型类型，和其他语言中差不多，后面会细讲得
+5. Rust需要我们对所有得参数进行推断，比如`let absent_number: Option<i32> = None;`，我们如果仅仅右边是`None`得话，其实rust还是不知道你这个类型到底是啥，需要人为定义为`Option<i32>`
+
+**使用Option的值**
+
+如下面的例子，使用Option之后，因为你的值除了是`i32`还有可能是`None`所以编译器就认为你这个地方如果是`None`和`i32`相加，类型上是有问题的会报错，虽然讲了很多原理，但是也没有讲具体如何解决，只是说让你看文档[Rust Option 文档](https://doc.rust-lang.org/std/option/enum.Option.html)，我们继续往下看吧，理论上判断出类型之后，用`match`关键字来决定接下来要做什么，我们下一章来看`match`
+
+```rust
+fn main () {
+    let x: i32 = 5;
+    let some_number: Option<i32> = Some(5);
+    let some_string = Some("a string");
+    let absent_number: Option<i32> = None;
+
+    // 这里会报错，因为i32和Option<i32>不能相加
+    let rlt = x + some_number;
+}
+```
+
+### 8.2 match控制流操作符
+
+#### 8.2.1 match语法的写法
+
+在Rust中有一个功能很强的`match`控制流操作符，他允许你对一个值进行一系列的比较，然后基于比较结果，执行一系列的操作。
+
+这种模式对比可以是对比结构体的值，变量名，通配符和其他各种东西。
+
+文中的例子是根据硬币的大小材质来分辨硬币的面额，这里我们用一个根据地名猜城市的例子，来举例可能会更加生动：
+
+```rust
+#[derive(Debug)]
+enum ScenicSpot {
+    // 长城
+    GreatWall,
+    /// 西湖
+    WestLake,
+    // 乐山大佛
+    LeshanGiantBuddha,
+}
+
+fn main() {
+    let spot = ScenicSpot::WestLake;
+    let city = get_spot_city(&spot);
+
+    println!("city -> {}", city);
+}
+
+fn get_spot_city(spot: &ScenicSpot) -> String {
+    match spot {
+        ScenicSpot::GreatWall => String::from("北京"),
+        ScenicSpot::LeshanGiantBuddha => {
+            String::from("四川")
+        },
+        ScenicSpot::WestLake => String::from("杭州"),
+    }
+}
+```
+
+**注意点**
+
+1. 在`get_spot_city`这个方法中，我们通过`match`关键字 + 需要比较的变量 + `{}`语法来规定比较的操作
+2. 不同的比较之间，通过`,`来分割，如果每个判断中有多行代码，可以用`{}`来进行多部操作，包一下，其实这里就是一个函数
+3. 只有`match`命中了那一条规则，才会进入到后续的函数体中
+
+#### 8.2.2 对绑定了对应值的枚举进行匹配
+
+之前讲过的就是枚举值，其实可以通过给一个值，来做细分的，那么这种类型的枚举值要如何通过`match`语法来细分呢，这里`match`可以是一个函数，其参数接受的值，就是现在这个`value`在当前判断条件下的值，所以可以写一段逻辑判断具体的如下：
+
+```rust
+#[derive(Debug)]
+struct Car {
+    brand: String,
+    version: String, 
+    max_speed: u32,
+    name: String
+}
+
+#[derive(Debug)]
+struct Airplane {
+    company: String,
+    max_speed: u32,
+    price: u32
+}
+
+#[derive(Debug)]
+enum Vehicle {
+    Walk,
+    LandTraffic(Car),
+    AirTraffic(Airplane)
+}
+
+fn get_traffic_tool(tool: &Vehicle) -> String {
+    match tool {
+        Vehicle::AirTraffic(state) => {
+            println!("空运公司为 -> {}", state.company);
+            String::from("坐飞机啦~")
+        },
+        Vehicle::LandTraffic(state) => {
+            println!("今天坐 -> {}", state.name);
+            String::from("坐车啦~")
+        },
+        Vehicle::Walk => String::from("走路锻炼身体~也不错")
+    }
+}
+```
+
+#### 8.2.3 匹配Option<T>
+
+之前在`8.1`中讲Option的时候，我们说因为`Option<T>`中可能包含`None`所以无法和对应的确定的`u32`类型相加，这里提供过`match`可以判断出当他不是`None`的时候来进行相加，我们看一个例子
+
+```rust
+fn main () {
+    let x: i32 = 5;
+    let some_number: Option<i32> = Some(5);
+    let some_string = Some("a string");
+    let absent_number: Option<i32> = None;
+
+    let rlt: Option<i32> = match some_number {
+        None => None,
+        Some(state) => Some(state + x)
+    };
+
+    println!("rlt -> {:?}", rlt);
+}
+```
+
+**注意点**
+
+1. 操作后的值类型，这里我们定义的也为Option，所以需要通过`Option`包一下
+2. 为什么`Some(5)`会命中`Some`规则，因为他们都涉及同一个变体，只不过他们得值不同，所以能够匹配上
+3. 对`None`的值也要判断，如果`match`没有对值得所有可能做判断得话，会报错（尽可能充分得进行匹配）
+
+通过`match` + `enum`在很多场景下是非常有用得，你将会看到
+
+#### 8.2.4 捕获所有类型和`_`占位符
+
+```rust
+use rand::Rng;
+
+fn match_number() -> String {
+    let rand_num = rand::thread_rng().gen_range(1..10);
+
+    let rlt_message = match rand_num {
+        5 => String::from("二等奖"),
+        3 => String::from("一等奖"),
+        _ => String::from("你没中奖")
+    };
+
+    rlt_message
+}
+
+fn main() {
+    println!("game res -> {}", match_number());
+}
+```
+
+**注意点**
+
+1. 前两行代码用来指出了3和5匹配上得条件，后面得第三个条件用来匹配其他剩下得所有可能
+2. 一般都是通过最后的东西来作为兜底
+
+### 8.3 用`if let `实现简洁的控制流
+
+使用`if let`这个语法可以让你简单处理就是`match`场景下，只需要一次匹配的场景，而忽略其余剩下的所有可能，比如以我们刚才相加的例子为例：
+
+```rust
+fn main () {
+    let x: i32 = 5;
+    let some_number: Option<i32> = Some(5);
+    let some_string = Some("a string");
+    let absent_number: Option<i32> = None;
+
+    // 这里我们需要同时处理None和Some这两种匹配上的情况
+    let rlt: Option<i32> = match some_number {
+        None => None,
+        Some(state) => Some(state + x)
+    };
+
+    println!("rlt -> {:?}", rlt);
+}
+```
+
+如果使用`if let`语法我们只需要处理其中一个我们需要的场景即可，这里我们不需要处理`None`的条件
+
+```rust
+fn main() {
+    let x = None;
+    let y = Some(5);
+    get_add_result(&x);  // 数字是无效的
+    get_add_result(&y); // 输入的值加6后是 -> 11
+}
+
+fn get_add_result (x: &Option<u32>) {
+    if let Some(state) = x {
+        let s = 6;
+        println!("输入的值加6后是 -> {}", s + state);
+    } else {
+        println!("数字是无效的")
+    }
+}
+```
+
+**注意点**
+
+1. `if let`这种语法其实用法上你理解就是和`if`一样，并不能像`match`一样直接有返回值
+2. `else`类似之前的`_`用于处理除了选中的那一种场景外的所有场景
+
+### 8.4 总结
+
+这一张哦我们展示了各种枚举值`enum`的创建、`Option<T>`类型的创建，当我们需要对枚举值做出判断时`match`的用法和`if let`的精简写法。现在在你的Rust程序中可以通过结构体和枚举来表达各种观念，通过创建你自己的类型来保证API的类型安全。编译器将能确保你的函数能够得到你想要的值。为了能让你更好的设计出好用的API，接下来我们将进入Rust的模块系统。
+
+## 9. 在大型项目中使用包、箱和模块来管理项目
+
+### 写在前面
+
+目前我们所有编写的代码都是在一个文件中的一个模块，随着项目增加，我们需要将代码切分成多个模块和多个文件。一个**包（package）**可以包含多个二进制的**箱（Crates）**，随着包的增大也可以拆成多个独立的箱（crates）以及可选的一个箱（Crates）。本章主要就是讲述了关于包管理相关的内容，对于非常大的项目来说，一些相关的包可以需要共同升级，cargo提供了workspace的概念会在后续讲解。
+
+除了函数集之外，封装一些函数的实践，让你的代码能够更容易复用，一旦你实现了一个操作其他代码可以通过公开的接口直接使用，不需要关心内部实现（需要让外部调用的使用puiblic，其他部分私有化private）。
+
+相关的观点还有作用域：无论是编译器还是coder，在创建作用域的时候，我们需要知道我们的变量、函数、结构体、枚举等在作用域内外哪里生效，是否会有命名冲突的情况。
+
+rust**管理模块系统**主要包括：
+
+1. Packages（包）: cargo的模块特性，让你能构建、测试和分享箱（crates）
+2. Crates（箱）：一个库或者可执行文件的模块树
+3. Modules（模块）：让你控制组织结构、作用域和私有路径（其实我理解这里就是代码了）
+4. Paths（路径）：一种命名项目的方式，例如结构体、函数或者模块
+
+本章主要讲解的就是模块的交互，怎么样在作用域中使用，最后将讲解一下模块系统如何使用。
+
+### 9.1 包和箱
+
+一个箱（crate）是一个二进制文件或者一个库。`crate root`是rust编译器开始运行和打包你的模块的源文件。
+
+一个包(package)是提供一个或多个箱，提供了一系列的功能。（一个package包含了一个cargo.toml文件，用于描述如何构建这些箱）。
+
+**创建一个新的package工程**
+
+```bash
+cargo new lesson_8_package
+```
+
+![](E:\Learn\learn-rust\images\04-package.png)
+
+我们创建的文件已经包括了`cargo.toml`文件，其用来表示当前的这个包，接下来我们看下cargo.toml这个文件的内容，其对应的包名和工程名是一样，**然后`main.rs`被认为是一个二进制箱的root文件**，然后，**`src/lib.rs`文件被认为是箱的库文件**。之前我们写的代码都是只有一个`main.rs`如果后续我们的代码又有`marin.rs`又有`lib.rs`那么这个时候我们就有两个箱了，一个用于构建二进制文件，一个用于处理库文件。
+
+![](E:\Learn\learn-rust\images\05-toml.png)
+
+**如何一个package中有多个二进制文件**：创建一个`src/bin`文件夹，其下的每一个文件都会被分割成一个二进制箱文件
+
+### 9.2 定义模块控制作用域和私有化
+
+几个关键字：
+
+**paths**：允许你去命名每一个想要分享的功能
+
+**use**：引入对应路径的功能到作用域中
+
+**pub**：使功能为公用功能
+
+**as**：给方法取别名（我猜和import as一样）
+
+**为什么要模块化？**
+
+模块化通过箱来组织代码具有更好的可读性和复用性。模块也用来控制项目私有化，可以定义什么是可以暴露给外部的（public）和只有内部能使用的方法（private）
+
+#### 9.2.1 模块的定义
+
+注意点：
+
+1. 使用`mod`关键字来代表这个文件是一个modules
+2. 可以使用`cargo new --lib xxxx`来创建lib
+3. `lib`文件其实就是一个`lib.rs`会被编译器认为是一个模块
+4. 模块是可以嵌套的,其是一个树结构，如果一个A模块内部包含了一个B模块，那么我们说B是A的子模块
+
+```rust
+#[cfg(test)]
+mod front_of_house {
+    mod hosting {
+        fn add_to_waitlist() {}
+        fn seat_at_table() {}
+    }
+
+    mod serving {
+        fn take_order() {}
+
+        fn serve_order() {}
+
+        fn take_payment() {}
+    }
+}
+```
+
+#### 9.2.2 箱的树结构
+
+对应的该箱的树结构如下所示，`hosting`和`serving`是`front_of_house`的子模块
+
+```
+crate
+ └── front_of_house
+     ├── hosting
+     │   ├── add_to_waitlist
+     │   └── seat_at_table
+     └── serving
+         ├── take_order
+         ├── serve_order
+         └── take_payment
+```
+
+### 9.3 在模块树对每一项的引用
+
+#### 9.3.1 绝对路径和相对路径的使用
+
+调用路径上对应的方法有两种：
+
+1. 绝对路径方法：在箱的根文件中，使用`crate`关键字和箱的名称来调用对应的方法
+2. 相对路径方法：在当前模块中使用`self`和`super`关键字来使用相关的方法
+
+**注意**：
+
+1. 在调用绝对或者相对路径的时候，一般使用多了个`::`来对相应的识别符做区分
+
+2. 如何区别如何使用绝对路径还是相对路径？
+   
+   > 取决于你封装代码的形式，比如下面的这个*eat_at_restaurant*这个方法，如果你是和上面的`front_of_house`放在一个模块中的那么绝对路径需要修改，相对路径不用修改，但是如果你要拆成两个模块，那么绝对路径不用修改，而相对路径需要修改。
+
+3. 官方建议多使用绝对路径，因为代码定义和每一项都更倾向于独立定义。
+
+```rust
+pub fn eat_at_restaurant() {
+    // 绝对路径调用
+    crate::front_of_house::hosting::add_to_waitlist();
+    // 相对路径调用
+    front_of_house::hosting::add_to_waitlist();
+}
+```
+
+这个时候如果我们编译上述代码，会报错，这是因为**在Rust中默认认为模块是私有的，我们不能接入私有的模块**，在rust中所有在私有边界中运行的项目（**函数，方法，结构体，枚举，模块和常量**）都是**默认为私有化的**。
+
+```bash
+error[E0603]: module `hosting` is private
+  --> src\lib.rs:27:28
+   |
+27 |     crate::front_of_house::hosting::add_to_waitlist();
+   |                            ^^^^^^^ private module
+   |
+note: the module `hosting` is defined here
+  --> src\lib.rs:2:5
+   |
+2  |     mod hosting {
+   |     ^^^^^^^^^^^
+
+For more information about this error, try `rustc --explain E0603`.
+error: could not compile `lesson_8_package` due to previous error
+```
+
+#### 9.3.2 使用pub 关键字来暴露相关方法
+
+我们可以通过`pub`关键字，将模块中的部分子模块以及方法向外进行暴露，所以修改后的代码如下图所示
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {
+            println!("add to wait list");
+
+            self::seat_at_table();
+        }
+        fn seat_at_table() {
+            println!("seat at table");
+        }
+    }
+
+    mod serving {
+        fn take_order() {
+            println!("take order");
+        }
+        fn serve_order() {
+            println!("serve order");
+        }
+        fn take_payment() {
+            println!("take payment");
+        }
+    }
+}
+
+pub fn eat_at_restaurant() {
+    crate::front_of_house::hosting::add_to_waitlist();
+    front_of_house::hosting::add_to_waitlist();
+}
+```
+
+**注意点**：因为是默认是私有的，所以这里我们需要将`hosting`和`add_to_waitlist`都增加`pub`关键字，不然编译还是会报错
+
+目前上述代码已经能够正常编译了~
+
+#### 9.3.3 使用`super`关键字调用相对路径方法
+
+如果一个子模块想调用兄弟模块或者父模块的一些项目怎么办呢？可以使用`super`关键字，其作用类似shell中的`..`到上一个作用域的上下文中，这样就可以调用相关的项目。
+
+以上述`9.3.2`中，如果子模块`serving`想要调用`hosting`中的方法，现在就需要使用`super`关键字。
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {
+            println!("add to wait list");
+            self::seat_at_table();
+        }
+        fn seat_at_table() {
+            println!("seat at table");
+        }
+    }
+
+    mod serving {
+        fn take_order() {
+            println!("take order");
+            // 用super到父级
+            // 然后调用父级hosting中的add_to_waitlist
+            super::hosting::add_to_waitlist();
+        }
+        fn serve_order() {
+            println!("serve order");
+        }
+        fn take_payment() {
+            println!("take payment");
+        }
+    }
+}
+```
+
+#### 9.3.4 将struct和enum设置为公开的
+
+**struct模块的注意点**
+
+1. struct在设置为`pub`的时候，相应的需要对外暴露的属性也需要用`pub`关键字声明
+2. 在实现对应的方法的时候，如果该方法需要向外暴露也需要增加`pub`
+
+```rust
+mod back_of_house {
+    pub struct Breakfast {
+        pub toast: String,
+        // 这里使用的时候seasonal_fruit是不可以使用的，因为是私有变量
+        seasonal_fruit: String,
+    }
+
+    impl Breakfast {
+            pub fn summer(toast: &str) -> Breakfast {
+                Breakfast {
+                    toast: String::from(toast),
+                    // 这个seasonal_fruit是私有变量
+                    // 这里需要注意的是，如果不是因为我们有这个summer方法
+                    // 我们可能一辈子都没办法创建Breakfast
+                    // 因为seasonal_fruit是不可访问的
+                    seasonal_fruit: String::from("Peach"),
+                }
+            }
+
+            pub fn tell_fruit_food(&self) {
+                // 实例方法通过self可以调到内部的私有变量
+                println!("fruit is -> {}", self.seasonal_fruit);
+            }
+       }
+    }
+}
+
+pub fn eat_at_restaurant() {
+    crate::front_of_house::hosting::add_to_waitlist();
+    front_of_house::hosting::add_to_waitlist();
+
+    let mut meal = back_of_house::Breakfast::summer("Rye");
+
+    // 这里meal.seasonal_fruit是无法被访问的，因为是私有变量
+    meal.toast = String::from("Wheat");
+    println!("I'd like {} toast, please", meal.toast);
+}
+```
+
+**enum模块注意点**
+
+1. 枚举值在作为模块私有化中只需要将对应的枚举值设置为`pub`即可，不需要对下面每个枚举值定义为`pub`
+
+```rust
+mod back_of_house {
+    // ...
+    pub enum Appetizer {
+        Soup,
+        Salad
+    }
+
+    impl Breakfast {
+        pub fn summer(toast: &str) -> Breakfast {
+            Breakfast {
+                toast: String::from(toast),
+                // 这个seasonal_fruit是私有变量
+                seasonal_fruit: String::from("Peach"),
+            }
+        }
+
+        pub fn tell_fruit_food(&self) {
+            println!("fruit is -> {}", self.seasonal_fruit);
+        }
+    }
+}
+
+pub fn eat_at_restaurant() {
+    let mut appetizer = back_of_house::Appetizer::Soup;
+}
+```
+
+现在我们已经会定义对应的模块了，接下来我们将使用`use`关键字，使用关键字来使用对应的模块
+
+### 9.4 使用use关键字将包引入到作用域中
+
+#### 9.4.1 使用use关键字将暴露模块引入作用域
+
+我们可以使用`use`关键字，创建路径和作用域之间的连接。之前的代码中的`Breakfast`结构体和`hosting`子模块，都需要通过绝对路径一致引用父模块，这样写起来十分浪费时间，代码也不太清楚（比较冗余），可以通过`use`关键字来简化：
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {
+            println!("add to wait list");
+            self::seat_at_table();
+        }
+        fn seat_at_table() {
+            println!("seat at table");
+        }
+    }
+
+    mod serving {
+        fn take_order() {
+            println!("take order");
+            super::hosting::add_to_waitlist();
+        }
+        fn serve_order() {
+            println!("serve order");
+        }
+        fn take_payment() {
+            println!("take payment");
+        }
+    }
+}
+
+mod back_of_house {
+    pub struct Breakfast {
+        pub toast: String,
+        seasonal_fruit: String,
+    }
+
+    pub enum Appetizer {
+        Soup,
+        Salad
+    }
+
+    impl Breakfast {
+        pub fn summer(toast: &str) -> Breakfast {
+            Breakfast {
+                toast: String::from(toast),
+                // 这个seasonal_fruit是私有变量
+                seasonal_fruit: String::from("Peach"),
+            }
+        }
+
+        pub fn tell_fruit_food(&self) {
+            println!("fruit is -> {}", self.seasonal_fruit);
+        }
+    }
+}
+
+// 将host注入到这个作用域中
+// 将Breakfast注入到这个作用域中
+// 将Appetizer注入到本作用域中
+use crate::front_of_house::hosting;
+use crate::back_of_house::Breakfast;
+use crate::back_of_house::Appetizer;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+
+    let mut meal = Breakfast::summer("Rye");
+
+    meal.toast = String::from("Wheat");
+
+    let mut appetizer = Appetizer::Soup;
+
+    println!("I'd like {} toast, please", meal.toast);
+}
+```
+
+#### 9.4.2 编写符合习惯的use路径
+
+**为什么要规范的写引入路径？**
+
+1. 当我们使用`use`写后面的路径的时候，尽量写到最近模块（离当前方法来说最近的那个作用域）的地址，不建议将整个路径写完整，不利于后期加使用的放，并且主子域的划分也不太 清晰。
+2. 如果两个元素有相同的需要引出的东西，这个时候如果我们引入路径仅仅写到那个`struct`或者其他项，可能会有重名冲突。
+
+#### 9.4.3 用`as`关键字为模块提供一个新的名字
+
+`9.4.2`中说如果存在导出的两个模块重名怎么办，可以使用`as`关键字，将导出的模块内容进行“改名”
+
+```rust
+// 后续使用Result的地方改成FmtResult即可
+use std::fmt::Result as FmtResult;
+
+fn main() {
+    println!("Hello, world!");
+}
+```
+
+#### 9.4.4 使用`pub use`导出命名
+
+当使用`use`引入模块的时候，可能这个`name`在一个新的作用域中是私有的，因此，我们可以使用`pub use`让我们引用的模块在代码作用域中式公开可用的。当使用了`pub use`之后外部代码可以使用相应的方法，如果没有使用`pub use`只有在他自己的作用域中能够使用相关`use`的方法
+
+#### 9.4.5 使用外部包
+
+使用外部包的步骤：
+
+1. 在`cargo.toml`文件中增加需要引入依赖的包名和版本
+   
+   ```toml
+   [package]
+   name = "lesson_8_package"
+   version = "0.1.0"
+   edition = "2021"
+   
+   # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+   
+   [dependencies]
+   rand="0.8.3"
+   ```
+
+2. 在对应的作用域中，通过`use`关键词将对应的模块进行导入
+   
+   ```rust
+   use rand::Rng;
+   
+   fn main() {
+       let rand_number = rand::thread_rng().gen_range(1..10);
+   }
+   ```
+
+#### 9.4.6 使用集成路径来清除大的`use`列表
+
+如果我们需要引入一个包中的多个项目，这个时候我们通过单一的`use`去写的话，如果引入100个项目，可能就要写垂直的100行，但是我们其实可以使用聚集的方式来写，具体的我们可以参考以下的例子：
+
+```rust
+// 聚合之前的写法
+mod lib;
+
+use lib;
+use lib::front_of_house;
+use lib::eat_at_restaurant;
+
+// 聚合之后的写法
+
+// 这里的self代表lib本身，后面类似import时候的解构的写法
+use lib::{ self as my_lib, eat_at_restaurant, front_of_house };
+```
+
+#### 9.4.7 全局操作符
+
+如果我们想引入所有公开的项目在当前作用域，我们可以使用`*`使用这个全局操作符的例子如下：
+
+```rust
+mod lib;
+use lib::*;
+
+fn main() {
+    println!("Hello, world!");
+    eat_at_restaurant();
+    let mut appetizer = back_of_house::Breakfast::summer("Brand");
+    front_of_house::hosting::add_to_waitlist();
+}
+```
+
+**这里我们需要注入，如果多个模块都是全部导入会不会有重名的冲突情况**（慎用）
+
+### 9.5 分离模块在多个其他文件中
+
+目前所有的模块都是写在一个文件里面的，但是将一些通用的函数方法拆出来其最终目的是为了在别的文件中复用，如何在别的文件中复用呢？
+
+1. 使用`mod`关键字申明对应的文件（文件名是什么声明的就是什么）
+2. 使用`use`关键字，将模块中的部分项目引入到相应作用域中
+
+```rust
+// main.rs
+// 之前写函数的文件名为lib.rs 所以这里是mod lib
+mod lib;
+
+use lib::front_of_house;
+use lib::eat_at_restaurant;
+
+fn main() {
+    println!("Hello, world!");
+    eat_at_restaurant();
+    front_of_house::hosting::add_to_waitlist();
+}
+```
+
+### 总结
+
+rust让我们去切分自己的文件通过多个箱，然后一个箱中可以切分多个模块，你可以在一个项目中引用多个模块中的项目。 你可以通过绝对路径或者相对路径的方式引用相应的包，通过`use`作用域来讲对应的模块引入到作用域中。模块的代码默认是私有化的，你可以通过`pub`关键字来使其变成公有化。
+
+## 10. 常用集合
+
+### 写在前面
+
+Rust标准库包含着一种集合的数据结构，称之为集合。集合和其他数据结构不一样的地方在于，集合可以包含多种不同的数据解构于一身。与数组和元组不同，集合是存在堆中的，因此在运行时他不需要知道数据的大小，在程序跑起来的时候可能增加或者缩减对应的大小。
+
+因此，对于开发者来说在开发过程中选择合适的集合，是一种技巧。本章中将讨论三种rust中常用的集合：
+
++ 向量：允许存储变量在相邻的位置
++ 字符串集合：本章将对String类型进入深刻的探讨
++ hashmap：允许使用特殊的键来关联值，更通用的数据解构称为map
+
+### 10.1 通过向量来存储列表值
+
+第一种集合类型称为向量，用`Vec<T>`来表示，向量是一种可以存储多个值的单一数据结构，在内存中多个值是彼此贴近存储的。**向量只能存储相同数据类型的值**，当你有多个相同类型的列表需要存储，可以使用他。
+
+#### 10.1.1 创建一个新的向量
+
+我们通过`Vec::new`来创建一个向量实例。因为向量只能接收一种数据类型的结构，所以通过泛型来设置这个向量可以接收数据的类型为`i32`。在更常用的代码中，**一旦你插入了相关的值，Rust可以自动推断出你想存储值的类型**，所以并不需要去进行类型的声明。相较于`Vec<T>`通过`vec!`可以创建一个带有初始值的向量，会更加的方便，其写法如下：
+
+```rust
+fn main() {
+    let mut v: Vec<i32> = Vec::new();
+    let mut v2 = vec![1, 2, 3];
+}
+```
+
+**注意点**
+
+Q1： Vec和Array的区别
+
+A1： Vec可以通过`push`直接扩展，其扩展的原理是重新分配一个新的内存空间，然后将老的空间复制到新的内存空间上，而`Array`是连续的空间，所以要提前声明长度，防止越界。
+
+
+
+#### 10.1.2 更新向量值
+
+通过`push`的方式来为向量增加元素。
+
+```rust
+fn main() {
+    let mut v: Vec<i32> = Vec::new();
+    v.push(3);
+
+    let mut v2 = vec![1, 2, 3];
+    // 如果这里
+    v2.push(4);
+}
+```
+**注意点**
+
+需要类型相同，如果我这个时候插入一个字符串类型，会如下错误报错
+
+>  expected integer, found struct `std::string::String`
+
+
+
+#### 10.1.3 删除向量元素
+
+**删除整个向量**：向量也遵守所有者原则，当其在所有者区外的时候，就会直接GC回收整个向量，并且其中的内容也会被回收了。
+
+
+
+#### 10.1.4 读取向量元素
+
+有两种方式可以读取向量的值：1. 通过索引 2. 利用提供的`get`方法。
+
+因为我们已经声明了向量的类型，所以得到值的类型是十分清楚的。
+
+```rust
+fn main() {
+    let mut v: Vec<i32> = Vec::new();
+    v.push(3);
+
+    let mut v2 = vec![1, 2, 3];
+    v2.push(4);
+
+    let thrid: &i32 = &v2[2];
+    println!("{}", thrid);
+
+    let fourth = v2.get(2);
+
+    match fourth {
+        Some(value) => println!("value -> {}", value),
+        None => println!("no value")
+    }
+}
+```
+
+**注意点**
+
+1. 索引的方式取值是从0开始的
+
+2. 使用索引方式拿到的是借用的值，如果需要使用引用，需要加上`&`
+
+3. 利用`get`方法拿到的值是`Option<&T>`，所以需要使用`match`或`if let`语法进行操作
+
+4. **对于不存在的引用**，使用索引的方式获取对应的值可能会导致程序的崩溃，因为这个时候引用了一个不存在的值，但是如果通过`get`方法，这个时候会返回一个`None`
+
+5. 如果一个值已经被借用了，这个时候再向向量添加元素这个时候会报错
+
+   > cannot borrow `v2` as mutable because it is also borrowed as immutable. 
+
+   ```rust
+   fn main() {
+       let mut v2 = vec![1, 2, 3];
+       let thrid = &v2[2];
+   
+       v2.push(4);  // 这里会报错
+   }
+   
+   // 解决办法
+fn main() {
+       let mut v2 = vec![1, 2, 3];
+   
+       // 剞劂办法是
+       {
+           let thrid = &v2[2];
+           println!("{}", thrid);
+       }
+   
+       v2.push(4);
+   }
+   ```
+   
+   **解决办法**：将`push`语句前置或者使用所有者，将对应的引用先释放，其原因是，这种场景下需要扩展向量容积，但是因为`v2[2]`已经被借用，不能移动其空间在内存中的位置，所以这个时候维持原状，`push`方法不能增加元素了。
+
+#### 10.1.5 向量中值的迭代特性
+
+使用`for...in语法`可以通过迭代器的方式遍历相应的可迭代类型。
+
+```rust
+fn main () {
+    // 对v2的引用进行遍历
+    for item in &v2 {
+        // 这里可以直接使用for循环
+        // 对v2进行遍历操作
+        println!("value => {}", item);
+    }
+}
+```
+
+如果想对对应遍历的值进行修改，**可以使用`*`运算符放在对应的变量之前，即可对引用类型进行修改**：
+
+```rust
+fn main() {
+    let mut v2 = vec![1, 2, 3];
+
+    for i in &mut v2 {
+        *i = *i * 100 / 2;
+    }
+
+    for item in &v2 {
+        println!("value => {}", item);
+        // value => 50
+        // value => 100
+        // value => 150
+    }
+}
+```
+
+**注意点**：
+
++ 如果需要对对应的变量进行修改，类似`javascript`中的`map`的用法，需要遵循以下几点
+  + 使用`mut`在引用变量之前
+  + 使用`*`在对应的变量之前，这是一种指针的用法， 在后续章节会讲到
+  + 对对应的变量进行操作，需要使用`*i`在等式左右两边
+
+
+
+#### 10.1.6 使用枚举类型来存储多类型
+
+如果向量只用来存储一种类型的值，在使用上会不太方便。幸运的是，枚举的衍生类型可以让我们定义多种不同的类型，之后所有枚举的衍生类都会被认为是一个数据类型，所以当我们需要在向量中存储不同类型的时候，我们可以定义枚举类。
+
+我们可以通过定义枚举类的衍生类型，来区分不同的数据类型，这样所有存储在这个向量中的类型都会被认为是我们定义的这个枚举类。
+
+```rust
+pub mod EnumTypesTest {
+    #[derive(Debug)]
+    pub enum SpreadSheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String)
+    }
+    
+
+    pub fn useMultiTypes () {
+        // 这个向量中所有的类型都是SpreadSheetCell
+        let row = vec![
+            SpreadSheetCell::Int(3),
+            SpreadSheetCell::Float(3.14),
+            SpreadSheetCell::Text(String::from("string"))
+        ];
+
+        for item in &row {
+            println!("types -> {:?}", item);
+        }
+    }
+}
+```
+
+Rust在编译时需要知道对应存储元素的类型，以至于知道实际在运行时需要在堆中分配多少内存。第二个优势是rust可以推断出这个向量中存储元素的类型。
+
+
+
+#### 10.1.7 向量的其他API用法
+
+具体的api可以参考相关的api文档：[Struct Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)
+
+1. 切片
+
+   ```rust
+   fn read_slice(slice: &[usize]) {
+       // ...
+   }
+   
+   let v = vec![0, 1];
+   read_slice(&v);
+   ```
+
+2. 分配容量
+
+   ```rust
+   // 和alloc一样分配10个存储空间
+   let mut vec = Vec::with_capacity(10);
+   
+   // len获取已存储数据的长度
+   assert_eq!(vec.len(), 0);
+   // capacity获取分配空间的长度
+   assert_eq!(vec.capacity(), 10);
+   
+   // These are all done without reallocating...
+   for i in 0..10 {
+       vec.push(i);
+   }
+   assert_eq!(vec.len(), 10);
+   assert_eq!(vec.capacity(), 10);
+   ```
+
+3. 元素的操作
+
+   ```rust
+   // push
+   let mut vec = vec![1, 2];
+   vec.push(3);
+   assert_eq!(vec, [1, 2, 3]);
+   
+   // pop弹出元素
+   let mut vec = vec![1, 2, 3];
+   assert_eq!(vec.pop(), Some(3));
+   assert_eq!(vec, [1, 2]);
+   
+   // append合并两个向量
+   // 将第一个向量和第二个向量合并，并且清空第二个i向量
+   let mut vec = vec![1, 2, 3];
+   let mut vec2 = vec![4, 5, 6];
+   vec.append(&mut vec2);
+   assert_eq!(vec, [1, 2, 3, 4, 5, 6]);
+   assert_eq!(vec2, []);
+   
+   // 清空数组
+   // drain和splice有点像，原向量保存切片之前的内容，丢掉切片之后的内容
+   let mut v = vec![1, 2, 3];
+   let u: Vec<_> = v.drain(1..).collect();
+   assert_eq!(v, &[1]);
+   assert_eq!(u, &[2, 3]);
+   
+   // A full range clears the vector
+   v.drain(..);
+   assert_eq!(v, &[]);
+   
+   //clear直接清空对应的向量
+   let mut v = vec![1, 2, 3];
+   
+   v.clear();
+   
+   assert!(v.is_empty());
+   ```
+
+
+
+### 10.2 通过String存储UTF-8文本
+
+本小节将更深度使用String类型，rust使用者因为以下三个原因导致对string使用困难：
+
++ Rust倾向于去抛出可能的错误
++ String类型可能比很多coder想象的更复杂
++ UTF-8
+
+所以当你从其他语言转过来开发rust，发现会变得更加困难。本节将讨论String的创建、更新和读写
+
+
+
+#### 10.2.1 什么是String
+
+在rust中只有一种string类型，其类型为`str`，通常在借用的时候写作`&str`借用对应的引用。
+
+`String`类通过rust的标准库提供而不是初始数据结构，是可扩展的，而可变的UTF-8的string类型。
+
+我们通常使用的是`String`或`&str`切片，在Rust标准库中还有很多其他的String类型比如`OsString`、`OsStr`、`CString`等。
+
+
+
+#### 10.2.2 String的创建
+
+String的创建目前有三种方式：
+
++ 使用`new`方法
++ 使用`from`方法
++ 使用`str`自带的`to_string`方法
+
+```rust
+pub mod StringDemo {
+    pub fn StringCreate() {
+        let mut s = String::new();
+
+        let data = "new string";
+
+        let s1 = data.to_string();
+
+        let s2 = String::from(data);
+
+        println!("s1 -> {}, s2 -> {}", s1, s2)
+    }
+}
+```
+
+
+
+#### 10.2.3 String的更新
+
+String作为一种集合类型也有和向量`Vec`类似的拼接操作：
+
++ 使用`push`方法
++ 使用`+`：这种方法可以是`str`的引用，也可以是直接str
++ 使用`format!`方法：类似时殷弘模板字符串将多个String进行拼接
+
+```rust
+pub mod StringDemo {
+   pub fn string_update() {
+        let mut s = String::from("hello");
+        let s2 = String::from(" world\n");
+
+        s += &s2;
+
+        s.push_str(" are you ok?");
+
+        s += " pidan";
+
+        println!("s -> {}", s)
+       
+        let s4 = "tic";
+        let s5 = "tac";
+        let s6 = "toe";
+
+        let concat = format!("{}-{}-{}", s4, s5, s6);
+
+        println!("{}", concat);
+   }
+}
+```
+
+
+
+#### 10.2.4 字符串索引
+
+在很多变成语言中，通过索引来获取字符串中的字符看似是一个常规操作，但是在rust中这么做会报错（**rust的String不能通过索引获取对用的字符值**）。
+
+**不能这么操作的理由是**：
+
++ 目前UTF-8中有的字符占用一个字节，而比如中文或者俄文其实际占用了两个字节，所以如果我们直接通过索引其实是拿不到我们想要的字符的，因为都是通过二进制存储的。
++ 和电脑系统存储的字符类型有关，在不同字符集和标量下表现不同
++ 和Rust String的性能有关，Rust的索引获取元素的复杂度并不是O(1)因为并不知道这个集合有多大。
+
+
+
+#### 10.2.5 切片类型
+
+使用索引是无法获取到对应的字符的，但是我们可以是用`range`切片的方式来获取相应的字符
+
+```rust
+pub fn slice_string() {
+    let mut s = String::from("Hello world");
+    let s2 = &s[1..2];
+
+    println!("s2 -> {}", s2); // e
+    println!("s2 -> {}", &s[0..1]); // e
+
+    let firstChar = s.get(0..1);
+
+    if let Some(pat) = firstChar {
+        println!("char -> {}", pat);
+    }
+}
+```
+
+
+
+#### 10.2.6 字符串迭代遍历
+
+通过`chars`和`bytes`可以对字符和字节进行遍历，结合`for..in`的方法
+
+```rust
+for c in "नमस्ते".chars() {
+    println!("{}", c);
+}
+
+for b in "नमस्ते".bytes() {
+    println!("{}", b);
+}
+```
+
+
+
+#### 10.2.7 字符串并不简单
+
+总的来说String是非常复杂的。在Rust中选择在Rust的程序中正确处理String数据的默认行为，比如考虑直接处理UFT-8的数据。这种权衡导致相较于其他语言增加了String的复杂性。但是带来的好处是，当你在编程的时候，你不用去处理以下ACSII字符的异常问题。
+
+
+
+### 10.3 键值对关联存储Hash Map
+
+最后一种通用的集合类型称为HashMap。HashMap的定义为`HashMap<K, V>`用来存储键值的类型`K`和值的类型`V`。
+
+通过hash算法来决定存储在内存中的键值是什么样子。许多编程语言支持这种类型的数据解构，可能有不同的名字来描述这种结构比如hash，map，对象，hash 表、字典等。
+
+当我们想要通过索引来查询数据的时候，hash map是之分有用的，本节中我们将介绍一些基础的API用法，但是更多的用法在HashMap<K, V>的标准库中可以查询。
+
+
+
+#### 10.3.1 创建一个hashmap
+
+HashMap的使用步骤：
+
++ 引入hashmap的包：`std::collections::HashMap`，hashmap不像Vec一样是默认导入的需要额外引入
++ 使用`new`方法创建`HashMap`实例
++ 利用`insert`方法插入对应的值
+
+```rust
+use std::collections::HashMap;
+
+pub mod hash_learner {
+    pub fn create_hash_map {
+        let mut scores: HashMap<String, i32> = HashMap::new();
+
+        scores.insert(String::from("tom"), 60);
+        scores.insert(String::from("jerry"), 80);
+        
+        for key in scores.into_iter() {
+            let k = key.0;
+            let v = key.1;
+
+            println!("k -> {}, v -> {}", k, v);
+            // k -> jerry, v -> 80
+			// k -> tom, v -> 60
+        }
+    }
+}
+```
+
+**注意点**：
+
+1. HashMap是存储在堆中的
+2. HashMap的所有键必须有相同的类型
+3. HashMap的所有值必须有相同的类型
+
+
+
+**利用向量和元组的collect方法来构建hash map**
+
+```rust
+    pub fn build_with_collect() {
+        use std::collections::HashMap;
+
+        let students = vec![String::from("Tom"), String::from("Jerry")];
+        let initial_scores = vec![90, 80];
+
+        let score_map: HashMap<_, _> = students
+            .into_iter()
+            .zip(initial_scores.into_iter())
+            .collect();
+
+        for key in score_map.into_iter() {
+            let k = key.0;
+            let v = key.1;
+
+            println!("k -> {}, v -> {}", k, v);
+        }
+    }
+```
+
+这里主要用到了迭代器的特性，具体的注意点如下：
+
++ 这里的`HashMap<_, _>`是必须的，因为`collect`可能会产生多种数据结构，rust并不知道对应的值是什么数据结构，所以必须认为强制告诉编译器
++ `zip`是迭代器的一种方法，将两边的对应索引的值匹配起来。
++ `collect`方法收集数据通过数字的集合类型，包括HashMap。
+
+
+
+#### 10.3.2 Hashmaps和所有者
+
+当一个值被HashMap收录之后，他的所有者就变成了HashMap，所以这个时候就不用再借用对应的值，如果借用了对应的值，这个时候编译器会报错，看下面的这个例子：
+
+```rust
+pub fn ownership () {
+    use std::collections::HashMap;
+
+    let field_name = String::from("Favorite color");
+    let field_value = String::from("Blue");
+
+    let mut map = HashMap::new();
+    map.insert(field_name, field_value);
+
+    // let item = field_name;
+    // 这一行代码会报错，因为这个时候field_name已经被放入了hashmap，所以无法再进行出借了。
+   
+}
+```
+
+**解决办法**
+
++ 出借给hashMap的时候使用引用的方式进行出借即可
+
+  ```rust
+      pub fn ownership () {
+          use std::collections::HashMap;
+  
+          let field_name = String::from("Favorite color");
+          let field_value = String::from("Blue");
+      
+          let mut map = HashMap::new();
+          map.insert(&field_name, field_value);
+  
+          let item = field_name; // 当使用&field_name出借的时候，这里就不会报错
+      }
+  ```
+
+  
+
+#### 10.4.3 查询hashmap中的值
+
+上面的尝试中，使用了`.into_iter`方法，进行遍历，这里将系统的介绍几个获取hashMap中值的方法：
+
++ 使用`get`方法获取单个值，这里获取的是一个`Option<&K>`
++ 直接通过`for...in`进行遍历，这里获取的就是对应的值
+
+```rust
+pub fn read() {
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+    let tom = String::from("tom");
+    let jerry = String::from("jerry");
+
+    scores.insert(&tom, 60);
+    scores.insert(&jerry, 80);
+
+    let tom_score = scores.get(&tom);
+    let jerry_score = scores.get(&jerry);
+
+    println!("tom -> {:?}, jerry -> {:?}", tom_score, jerry_score);
+
+    for (key, value) in &scores {
+        println!("key -> {}, value -> {}", key, value);
+    }
+}
+```
+
+
+
+#### 10.4.4 更新Hash Map
+
+尽管键值对是可以不断扩展的，但是每一个键只能关联一个值，当你更新已存在的键的时候，你需要决定怎样去处理这种场景，是放弃老的值，保留新的，还是放弃新的保存老的，还是新老联合一下。只有当key不存在的时候你存才会新创建一条记录。
+
+**覆写老的值**
+
+当我们多次给同样的key插入(`insert`)不同的值，最后保留的值是最后一次插入的值，这个时候老的值就会被覆写
+
+```rust
+pub fn update() {
+    use std::collections::HashMap;
+
+    let key = String::from("Tom");
+    let mut scores = HashMap::new();
+
+    scores.insert(&key, 50);
+    scores.insert(&key, 60);
+
+    println!("overwrite -> {:#?}", scores);
+}
+```
+
+
+
+**当键不存在场景才插入**
+
+通常场景，我们当key不存在的时候才插入对应的值。因此Hash Map提供了一个特殊的api，`entry`。`entry`这个API使用后返回的类型为`Entry`，它用于告诉使用者这个值是否已经存在，之后调用`or_insert`方法来进行插入，这个`or_insert`方法是`Entry`定义的。
+
+```rust
+pub fn update() {
+    use std::collections::HashMap;
+
+    let jerry = String::from("jerry");
+    let timi = String::from("Timi");
+    let mut scores = HashMap::new();
+
+
+    scores.insert(&jerry, 60);
+    scores.entry(&jerry).or_insert(50);
+    scores.entry(&timi).or_insert(80);
+
+    println!("overwrite -> {:#?}", scores);
+    // jerry 60, timi 90
+
+}
+```
+
+
+
+**基于已有内容更改**
+
+还有一种场景类似js中的`map`，对原来的hashmap内容进行修改
+
+```rust
+use std::collections::HashMap;
+
+let text = "hello world wonderful world";
+
+let mut map = HashMap::new();
+
+for word in text.split_whitespace() {
+    let count = map.entry(word).or_insert(0);
+    *count += 1;
+}
+
+println!("{:?}", map);
+```
+
+这里的count是个`&mut i32`的类型，这个时候可以使用`*`运算符来改变引用的值。
 
 
 
 
+
+**Hash 函数**
+
+默认的hash生成算法是`SipHash `方法，其可以防止DoS攻击。这种算法不是最快的但是最好的权衡了安全性和性能。
+
+
+
+### 总结
+
+向量、字符串和哈希表，提供了程序中大量必要的功能，当你存储、接入和修改数据的时候。这里也有一些你需要知道的经验之谈：
+
++ 在大量整数列表的情况下，使用向量和返回中位数（排序取中间数）和列表的众数（经常出现的数，这种用了hash表也可能有用）。
++ 将string转变为颠倒的字符。需要时刻关注UTF-的编码规范，在字符串排序的时候。
++ 使用向量和哈希表的时候创建一个接口允许用户增加用户名在公司中。
+
+标准的库的API的使用还需要查看官方文档的文档，接下来一节将讨论错误处理机制。
